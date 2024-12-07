@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="/css/default.css"/>
+        <h:outputStylesheet name="/css/cssLayout.css"/>
+        <title>Don Agave</title>
+    </h:head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+
+    <h:body>
+
+        <div id="top">
+            <header class="bg-light border-bottom shadow-sm py-3 rounded">
+                <div class="container d-flex justify-content-between align-items-center">
+                    <!-- Nombre o Logo -->
+                    <div class="d-flex align-items-center">
+                        <i style="color: black" class="bi bi-bag-check-fill h1"></i>
+
+                        <h5 class="m-3 fw-bold text-dark">  Sistema de Ventas Don Agave</h5>
+                    </div>
+
+                    <!-- Detalles adicionales -->
+                    <div class="text-muted small">
+                        <span class="me-3">Bienvenido,</span>
+                        <h:outputText value="#{aDUsuario.usuario.nombre}"/>
+                        <span class="badge bg-primary">Versión Beta 1.0</span>
+                    </div>
+                </div>
+            </header> 
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="left">
+                    <h:form>
+                        <h:commandButton value="Inicio" class="btn btn-secondary m-2" style="width: 150px;"
+                                         action="dashboard"/>
+                        <h:commandButton value="Realizar Venta" class="btn btn-secondary m-2" style="width: 150px;"
+                                         action="ventas" />
+                        <h:commandButton value="Registrar gasto" class="btn btn-secondary m-2" style="width: 150px;"
+                                         action="registro_gasto" />
+                        <!-- <h:commandButton value="Registrar usuario" class="btn btn-secondary m-2" style="width: 150px;"
+                                         action="registro_usuario"/> -->
+                        <h:commandButton value="Registrar Reserva" class="btn btn-secondary m-2" style="width: 150px;"
+                                         action="registro_reserva"/>
+                        <h:commandButton value="Inventario" class="btn btn-secondary m-2" style="width: 150px;"
+                                         action="registro_producto" />
+                        <h:commandButton value="Cerrar Sesión" class="btn btn-danger m-2" style="width: 150px;"
+                                         action="#{aDUsuario.pagina()}" actionListener="#{aDUsuario.logout}" />
+
+                    </h:form>
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content">
+                    <div class="d-flex align-items-end flex-column bd-highlight mb-3" style="height: 500px;">
+
+                    </div>
+                </ui:insert>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom">
+
+                <footer class="bg-dark text-light py-3 mt-4">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Logo o Título -->
+                            <div class="col-md-4 text-center text-md-start">
+                                <h5 class="text-uppercase">Mi Aplicación</h5>
+                                <p class="small">Promoviendo la salud y bienestar con tecnología.</p>
+                            </div>
+
+                            <!-- Navegación rápida -->
+                            <div class="col-md-4 text-center">
+                                <h5 class="text-uppercase">Enlaces rápidos</h5>
+                                <h:form>
+                                    <h:commandButton value="Inicio" class="btn btn-secondary m-2" style="width: 150px;"
+                                                     action="dashboard"/>
+                                    <h:commandButton value="Realizar Venta" class="btn btn-secondary m-2" style="width: 150px;"
+                                                     action="ventas" />
+                                    <h:commandButton value="Registrar gasto" class="btn btn-secondary m-2" style="width: 150px;"
+                                                     action="registro_gasto" />
+                                    <!-- <h:commandButton value="Registrar usuario" class="btn btn-secondary m-2" style="width: 150px;"
+                                                     action="registro_usuario"/> -->
+                                    <h:commandButton value="Registrar Reserva" class="btn btn-secondary m-2" style="width: 150px;"
+                                                     action="registro_reserva"/>
+                                    <h:commandButton value="Inventario" class="btn btn-secondary m-2" style="width: 150px;"
+                                                     action="registro_producto" />
+                                    <h:commandButton value="Cerrar Sesión" class="btn btn-danger m-2" style="width: 150px;"
+                                                     action="#{aDUsuario.pagina()}" actionListener="#{aDUsuario.logout}" />
+
+                                </h:form>
+                            </div>
+
+                            <!-- Información de contacto -->
+                            <div class="col-md-4 text-center text-md-end">
+                                <h5 class="text-uppercase">Contacto</h5>
+                                <p class="small mb-1">Correo: contacto@miaplicacion.com</p>
+                                <p class="small">Teléfono: +52 555-123-4567</p>
+                            </div>
+                        </div>
+
+                        <hr class="bg-light my-2">
+
+                            <!-- Pie de página -->
+                            <div class="text-center small">
+                                © 2024 Mi Aplicación. Todos los derechos reservados.
+                            </div>
+                        </hr>
+                    </div>
+                </footer>
+
+            </ui:insert>
+        </div>
+
+    </h:body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</html>

@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body> 
+
+        <ui:composition template="./../template/plantilla.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+
+                    <p:growl id="messages"/>
+                    <h:form>
+                        <h1><h:outputText value="Registro de gastos"/></h1>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Fecha:" for="fecha" />
+                            <p:calendar id="fecha" value="#{aDGasto.gasto.fecha}" required="true" title="Fecha" mode="popup" showOn="button" pattern="dd/MM/yyyy"
+                                                    timeZone="America/Mexico_City" />
+                            <h:outputLabel value="Proveedor:" for="proveedor" />
+                            <h:selectOneMenu id="proveedor" value="#{aDGasto.gasto.proveedor}" title="Proveedor" required="true" requiredMessage="El campo Proveedor es obligatorio." class="form-select">
+                                <f:selectItem itemValue="" itemLabel="Seleccione proveedor" noSelectionOption="true" />
+                                <f:selectItem itemValue="Caja" itemLabel="Caja" />
+                                <f:selectItem itemValue="Bolsa" itemLabel="Bolsa" />
+                            </h:selectOneMenu>
+                            
+                            <h:outputLabel value="TipoActividad:" for="tipoActividad" />
+                            <h:selectOneMenu id="tipoActividad" value="#{aDGasto.gasto.tipoActividad}" title="TipoActividad" required="true" requiredMessage="El campo TipoActividad es obligatorio." class="form-select">
+                                <f:selectItem itemValue="" itemLabel="Seleccione Tipo de Actividad" noSelectionOption="true" />
+                                <f:selectItem itemValue="Pagos" itemLabel="Pagos" />
+                                <f:selectItem itemValue="Compra" itemLabel="Compra" />
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Forma de Pago:" for="formaPago" />
+                            <h:selectOneMenu id="formaPago" value="#{aDGasto.gasto.formaPago}" title="FormaPago" required="true" requiredMessage="El campo forma de Pago es obligatorio." class="form-select">
+                                <f:selectItem itemValue="" itemLabel="Seleccione la forma de Pago" noSelectionOption="true" />
+                                <f:selectItem itemValue="Efectivo" itemLabel="Efectivo" />
+                                <f:selectItem itemValue="Transferencia" itemLabel="Transferencia" />
+                                <f:selectItem itemValue="Cheque" itemLabel="Cheque" />
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Descripcion:" for="descripcion" />
+                            <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{aDGasto.gasto.descripcion}" title="Descripcion" />
+                            <h:outputLabel value="Monto Total:" for="montoTotal" />
+                            <h:inputText id="montoTotal" value="#{aDGasto.gasto.montoTotal}" title="MontoTotal" required="true" requiredMessage="The MontoTotal field is required."/>
+                            <p:commandButton value="Registrar" actionListener="#{aDGasto.registroGasto()}" class="btn btn-success" ajax="false" update="messages"  />
+                        </h:panelGrid>
+                    </h:form>
+                    
+
+
+                    
+
+                </f:view>
+                <f:view>
+                    <h:form>
+                        <h1><h:outputText value="Lista Gastos"/></h1>
+                        <p:dataTable value="#{aDGasto.gastos}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdGasto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idGasto}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fecha}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Proveedor"/>
+                                </f:facet>
+                                <h:outputText value="#{item.proveedor}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="TipoActividad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipoActividad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="FormaPago"/>
+                                </f:facet>
+                                <h:outputText value="#{item.formaPago}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descripcion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.descripcion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="MontoTotal"/>
+                                </f:facet>
+                                <h:outputText value="#{item.montoTotal}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

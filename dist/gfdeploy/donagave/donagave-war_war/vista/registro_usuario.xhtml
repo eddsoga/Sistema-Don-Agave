@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+ 
+        <ui:composition template="./../template/plantilla.xhtml">
+            
+            <ui:define name="left">
+                
+            </ui:define>
+
+            <ui:define name="content">
+                <f:view>
+
+                    <p:growl id="messages"/>
+                    <h:form>
+                        <h1><h:outputText value="Registro de Usuarios"/></h1>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Nombre:" for="nombre" />
+                            <h:inputText id="nombre" value="#{aDUsuario.usuario.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                            <h:outputLabel value="Usuario:" for="usuario" />
+                            <h:inputText id="usuario" value="#{aDUsuario.usuario.usuario}" title="Usuario" required="true" requiredMessage="The Usuario field is required."/>
+                            <h:outputLabel value="Rol:" for="rol" />
+                            <h:selectOneMenu id="rol" value="#{aDUsuario.usuario.rol}" title="Rol" required="true" requiredMessage="El campo Rol es obligatorio." class="form-select">
+                                <f:selectItem itemValue="" itemLabel="Seleccione rol" noSelectionOption="true" />
+                                <f:selectItem itemValue="Cajero" itemLabel="Cajero" />
+                                <f:selectItem itemValue="Gerente" itemLabel="Gerente" />
+                                <f:selectItem itemValue="Mesero" itemLabel="Mesero" />
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Password:" for="password" />
+                            <h:inputText id="password" value="#{aDUsuario.usuario.password}" title="Password" required="true" requiredMessage="The Password field is required."/>
+                            <p:commandButton value="Registrar" actionListener="#{aDUsuario.registroUsuario()}" class="btn btn-success" ajax="false" update="messages"  />
+                            
+                        </h:panelGrid>
+                    </h:form>
+                    <h:form>
+                        <p:commandButton value="Atrás" action="index" ajax="false" styleClass="btn btn-secondary" />
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

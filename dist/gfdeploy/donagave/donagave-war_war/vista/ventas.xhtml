@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+ 
+        <ui:composition template="./../template/plantilla.xhtml">
+
+            <ui:define name="content">
+                <div class="d-flex flex-column bd-highlight mb-3" style="height: 500px;">
+                    <f:view>
+
+                        <h:form>
+                            <h1><h:outputText value="Registrar Venta"/></h1>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="FechaHoraVenta:" for="fechaHoraVenta" />
+                                <p:inputText id="fechaHoraVenta" value="#{aDVenta.venta.fechaHoraVenta}" title="FechaHoraVenta" required="true" requiredMessage="The FechaHoraVenta field is required.">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </p:inputText>
+                                <p:outputLabel value="CantidadProductos:" for="cantidadProductos" />
+                                <p:inputText id="cantidadProductos" value="#{aDVenta.venta.cantidadProductos}" title="CantidadProductos" required="true" requiredMessage="The CantidadProductos field is required."/>
+                                <p:outputLabel value="PrecioIndividual:" for="precioIndividual" />
+                                <p:inputText id="precioIndividual" value="#{aDVenta.venta.precioIndividual}" title="PrecioIndividual" required="true" requiredMessage="The PrecioIndividual field is required."/>
+                                <p:outputLabel value="MontoTotal:" for="montoTotal" />
+                                <p:inputText id="montoTotal" value="#{aDVenta.venta.montoTotal}" title="MontoTotal" required="true" requiredMessage="The MontoTotal field is required."/>
+                                <p:outputLabel value="FormaPago:" for="formaPago" />
+                                <p:inputText id="formaPago" value="#{aDVenta.venta.formaPago}" title="FormaPago" required="true" requiredMessage="The FormaPago field is required."/>
+                                <p:outputLabel value="GuiaParticular:" for="guiaParticular" />
+                                <p:inputText id="guiaParticular" value="#{aDVenta.venta.guiaParticular}" title="GuiaParticular" required="true" requiredMessage="The GuiaParticular field is required."/>
+                                <p:outputLabel value="EstadoVenta:" for="estadoVenta" />
+                                <p:inputText id="estadoVenta" value="#{aDVenta.venta.estadoVenta}" title="EstadoVenta" />
+                                <p:outputLabel value="IdProducto:" for="idProducto" />
+                                <p:selectOneMenu id="idProducto" value="#{aDVenta.venta.idProducto}" required="true" requiredMessage="The IdProducto field is required.">
+                                    <!-- TODO: update below reference to list of available items-->
+                                    <f:selectItems value="#{fixme}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="IdUsuario:" for="idUsuario" />
+                                <p:selectOneMenu id="idUsuario" value="#{aDVenta.venta.idUsuario}" required="true" requiredMessage="The IdUsuario field is required.">
+                                    <!-- TODO: update below reference to list of available items-->
+                                    <f:selectItems value="#{fixme}"/>
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+                        </h:form>
+                    </f:view>
+
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

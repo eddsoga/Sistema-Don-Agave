@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+ 
+        <ui:composition template="./../template/plantilla.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+
+                    <p:growl id="messages"/>
+
+
+                    <h:form>
+                        <h1><h:outputText value="Agendar Reserva"/></h1>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="FechaReserva:" for="fechaReserva" />
+                            <p:calendar id="fechaReserva" value="#{aDReservas.reserva.fechaReserva}" required="true" title="Fecha" mode="popup" showOn="button" pattern="dd/MM/yyyy"
+                                        timeZone="America/Mexico_City" />
+                            <p:outputLabel value="HoraReserva:" for="horaReserva" />
+                            <p:inputText id="horaReserva" value="#{aDReservas.reserva.horaReserva}" title="HoraReserva" required="true" requiredMessage="The HoraReserva field is required.">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </p:inputText>
+                            <p:outputLabel value="NombreCliente:" for="nombreCliente" />
+                            <p:inputText id="nombreCliente" value="#{aDReservas.reserva.nombreCliente}" title="NombreCliente" required="true" requiredMessage="The NombreCliente field is required."/>
+                            <p:outputLabel value="NumPersonas:" for="numPersonas" />
+                            <p:inputText id="numPersonas" value="#{aDReservas.reserva.numPersonas}" title="NumPersonas" required="true" requiredMessage="The NumPersonas field is required."/>
+                            <p:outputLabel value="LugarAsignada:" for="lugarAsignada" />
+                            <p:inputText id="lugarAsignada" value="#{aDReservas.reserva.lugarAsignada}" title="LugarAsignada" required="true" requiredMessage="The LugarAsignada field is required."/>
+                            <p:outputLabel value="EstadoReserva:" for="estadoReserva" />
+                            <p:selectOneMenu id="estadoReserva" value="#{aDReservas.reserva.estadoReserva}" required="true" requiredMessage="El campo estado Reserva es obligatorio.">
+                                <f:selectItem itemValue="" itemLabel="Seleccione proveedor" noSelectionOption="true" />
+                                <f:selectItem itemValue="Pendiente" itemLabel="Pendiente" />
+                                <f:selectItem itemValue="Realizada" itemLabel="Realizada" />
+                            </p:selectOneMenu>
+                            <p:commandButton value="Registrar" actionListener="#{aDReservas.registroReserva()}" ajax="false" update="messages"  />
+                        </p:panelGrid>
+                    </h:form>
+
+                </f:view>
+                
+                <f:view>
+
+
+                    <h:form>
+                        <h1><h:outputText value="Lista Reservas"/></h1>
+                        <p:dataTable value="#{aDReservas.reservas}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdReserva"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idReserva}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="FechaReserva"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaReserva}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="HoraReserva"/>
+                                </f:facet>
+                                <h:outputText value="#{item.horaReserva}">
+                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="NombreCliente"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombreCliente}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="NumPersonas"/>
+                                </f:facet>
+                                <h:outputText value="#{item.numPersonas}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="LugarAsignada"/>
+                                </f:facet>
+                                <h:outputText value="#{item.lugarAsignada}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="EstadoReserva"/>
+                                </f:facet>
+                                <h:outputText value="#{item.estadoReserva}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
