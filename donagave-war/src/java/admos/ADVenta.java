@@ -4,6 +4,7 @@
  */
 package admos;
 
+import Modelo.Productos;
 import Modelo.Ventas;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -25,6 +26,7 @@ public class ADVenta implements Serializable {
     @EJB
     private MDVentas mDVentas;
     private Ventas venta;
+    private List<Productos> productos;
     
     /**
      * Creates a new instance of ADVenta
@@ -56,18 +58,26 @@ public class ADVenta implements Serializable {
     public void creaVenta(){
         venta=new Ventas();
     }
-     public void registroReserva() {
+     public void registroVenta() {
         if (venta.getCantidadProductos()== 0 || venta.getEstadoVenta()== null || venta.getFechaHoraVenta()== null || venta.getFormaPago() == null ||venta.getGuiaParticular()== null || venta.getIdProducto() == null || venta.getIdUsuario()== null || venta.getIdVenta()== null || venta.getMontoTotal()==0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Todos los campos son obligatorios", ""));
         }
-        mDVentas.insertarReserva(venta);
+        mDVentas.insertarVentas(venta);
         venta = new Ventas();
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "Venta registrada correctamente.", "Venta registrado correctamente."));
 
     }
-     
+     public List<Productos> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Productos> productos) {
+        this.productos = productos;
+    }
     
+    
+
     
 }

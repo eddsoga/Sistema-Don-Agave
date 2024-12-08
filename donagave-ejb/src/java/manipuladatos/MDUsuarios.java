@@ -6,6 +6,7 @@ package manipuladatos;
 
 import Modelo.Usuarios;
 import accesodatos.UsuariosFacade;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -31,6 +32,14 @@ public class MDUsuarios {
     public void insertarPersona(Usuarios p) {
         usuariosFacade.create(p);
     }
+    public List<Usuarios> usuarios(){
+        return usuariosFacade.findAll();
+    }
+    
+    public Usuarios unUsuario(int id){
+        return usuariosFacade.find(id);
+    }
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

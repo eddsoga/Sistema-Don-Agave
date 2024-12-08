@@ -8,6 +8,7 @@ import Modelo.Productos;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +27,18 @@ public class ProductosFacade extends AbstractFacade<Productos> {
 
     public ProductosFacade() {
         super(Productos.class);
+    }
+    
+    public Productos getUnProducto(int id) {
+        Productos p = null;
+        try {
+            Query consultausuario = em.createNamedQuery("Productos.findByIdProducto");
+            consultausuario.setParameter("idProducto", id);
+            p = (Productos) consultausuario.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return p;
     }
     
 }

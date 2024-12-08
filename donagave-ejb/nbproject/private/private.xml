@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/accesodatos/GastosFacade.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/Modelo/Usuarios.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/Modelo/Ventas.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/accesodatos/ProductosFacade.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/accesodatos/VentasFacade.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/manipuladatos/MDProductos.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/accesodatos/ReservasmesasFacade.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/manipuladatos/MDVentas.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/accesodatos/AbstractFacade.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/manipuladatos/MDUsuarios.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/accesodatos/UsuariosFacade.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/Modelo/Productos.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/manipuladatos/MDReservas.java</file>
+            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-ejb/src/java/manipuladatos/MDGastos.java</file>
+        </group>
+    </open-files>
 </project-private>

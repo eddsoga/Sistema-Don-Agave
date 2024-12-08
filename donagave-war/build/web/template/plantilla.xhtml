@@ -41,7 +41,7 @@
                         <h:commandButton value="Inicio" class="btn btn-secondary m-2" style="width: 150px;"
                                          action="dashboard"/>
                         <h:commandButton value="Realizar Venta" class="btn btn-secondary m-2" style="width: 150px;"
-                                         action="ventas" />
+                                         action="ventas" actionListener="#{aDVenta.setProductos(aDProducto.getProductos())}" />
                         <h:commandButton value="Registrar gasto" class="btn btn-secondary m-2" style="width: 150px;"
                                          action="registro_gasto" />
                         <!-- <h:commandButton value="Registrar usuario" class="btn btn-secondary m-2" style="width: 150px;"
@@ -83,7 +83,7 @@
                                     <h:commandButton value="Inicio" class="btn btn-secondary m-2" style="width: 150px;"
                                                      action="dashboard"/>
                                     <h:commandButton value="Realizar Venta" class="btn btn-secondary m-2" style="width: 150px;"
-                                                     action="ventas" />
+                                                     action="ventas" actionListener="#{aDVenta.setProductos(aDProducto.getProductos())}" />
                                     <h:commandButton value="Registrar gasto" class="btn btn-secondary m-2" style="width: 150px;"
                                                      action="registro_gasto" />
                                     <!-- <h:commandButton value="Registrar usuario" class="btn btn-secondary m-2" style="width: 150px;"

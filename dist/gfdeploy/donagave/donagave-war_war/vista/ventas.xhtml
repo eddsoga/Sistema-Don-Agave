@@ -7,13 +7,13 @@
       xmlns:p="http://primefaces.org/ui">
 
     <body>
- 
+
         <ui:composition template="./../template/plantilla.xhtml">
 
             <ui:define name="content">
-                <div class="d-flex flex-column bd-highlight mb-3" style="height: 500px;">
+                <div class="d-flex flex-column bd-highlight mb-3" style="height: 100%;">
+                    <p:growl id="messsages"/>
                     <f:view>
-
                         <h:form>
                             <h1><h:outputText value="Registrar Venta"/></h1>
                             <p:panelGrid columns="2">
@@ -28,24 +28,106 @@
                                 <p:outputLabel value="MontoTotal:" for="montoTotal" />
                                 <p:inputText id="montoTotal" value="#{aDVenta.venta.montoTotal}" title="MontoTotal" required="true" requiredMessage="The MontoTotal field is required."/>
                                 <p:outputLabel value="FormaPago:" for="formaPago" />
-                                <p:inputText id="formaPago" value="#{aDVenta.venta.formaPago}" title="FormaPago" required="true" requiredMessage="The FormaPago field is required."/>
+
+                                <h:selectOneMenu id="formaPago" value="#{aDVenta.venta.formaPago}" title="FormaPago" required="true" requiredMessage="El campo forma de Pago es obligatorio." class="form-select">
+                                    <f:selectItem itemValue="" itemLabel="Seleccione la forma de Pago" noSelectionOption="true" />
+                                    <f:selectItem itemValue="Efectivo" itemLabel="Efectivo" />
+                                    <f:selectItem itemValue="Tarjeta" itemLabel="Transferencia" />
+                                    <f:selectItem itemValue="Cheque" itemLabel="Cheque" />
+                                </h:selectOneMenu>
+
                                 <p:outputLabel value="GuiaParticular:" for="guiaParticular" />
                                 <p:inputText id="guiaParticular" value="#{aDVenta.venta.guiaParticular}" title="GuiaParticular" required="true" requiredMessage="The GuiaParticular field is required."/>
                                 <p:outputLabel value="EstadoVenta:" for="estadoVenta" />
                                 <p:inputText id="estadoVenta" value="#{aDVenta.venta.estadoVenta}" title="EstadoVenta" />
                                 <p:outputLabel value="IdProducto:" for="idProducto" />
-                                <p:selectOneMenu id="idProducto" value="#{aDVenta.venta.idProducto}" required="true" requiredMessage="The IdProducto field is required.">
-                                    <!-- TODO: update below reference to list of available items-->
-                                    <f:selectItems value="#{fixme}"/>
+                                <p:selectOneMenu id="idProducto" value="#{aDVenta.venta.idProducto}" required="true" requiredMessage="El campo IdProducto es obligatorio.">
+                                    <f:selectItem itemLabel="Seleccione un producto" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{aDVenta.productos}" var="productos" itemValue="#{productos}" itemLabel="#{productos.nombreProducto}" />
                                 </p:selectOneMenu>
                                 <p:outputLabel value="IdUsuario:" for="idUsuario" />
                                 <p:selectOneMenu id="idUsuario" value="#{aDVenta.venta.idUsuario}" required="true" requiredMessage="The IdUsuario field is required.">
-                                    <!-- TODO: update below reference to list of available items-->
-                                    <f:selectItems value="#{fixme}"/>
+                                    <f:selectItem itemLabel="Seleccione un usuario" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{aDUsuario.usuarios()}" var="usuarios" itemValue="#{usuarios}" itemLabel="#{usuarios.nombre}" />
                                 </p:selectOneMenu>
+                                <p:commandButton value="Registrar" actionListener="#{aDVenta.registroVenta(aDVenta.venta)}" ajax="false" update="messages"/>
+                        
                             </p:panelGrid>
                         </h:form>
                     </f:view>
+                    
+                    <f:view>
+
+
+                        <h:form>
+                            <h1><h:outputText value="List"/></h1>
+                            <p:dataTable value="#{aDVenta.ventas()}" var="item">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IdVenta"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idVenta}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="FechaHoraVenta"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaHoraVenta}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CantidadProductos"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cantidadProductos}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PrecioIndividual"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.precioIndividual}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="MontoTotal"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.montoTotal}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="FormaPago"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.formaPago}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="GuiaParticular"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.guiaParticular}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="EstadoVenta"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.estadoVenta}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IdProducto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idProducto}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IdUsuario"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idUsuario}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </f:view>
+
 
                 </div>
             </ui:define>

@@ -13,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import manipuladatos.MDUsuarios;
 import Modelo.Usuarios;
+import java.util.List;
 
 /**
  *
@@ -80,6 +81,14 @@ public class ADUsuario implements Serializable {
         creaUsuario();
 
     }
+    
+     public List<Usuarios> usuarios(){
+        return mDUsuarios.usuarios();
+    }
+     
+     public String getNombre(){
+        return this.usuario.getNombre();
+    }
 
 
     public Usuarios getUsuario() {
@@ -108,5 +117,9 @@ public class ADUsuario implements Serializable {
 
     public void setPagina(String pagina) {
         this.pagina = pagina;
+    }
+    
+    public Usuarios unUsuario(int id){
+        return mDUsuarios.unUsuario(id);
     }
 }

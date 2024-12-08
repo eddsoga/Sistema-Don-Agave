@@ -27,6 +27,9 @@ public class MDProductos {
     public List<Productos> productos(){
         return productosFacade.findAll();
     }
+    public Productos getUnProducto(int id){
+        return productosFacade.getUnProducto(id);
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

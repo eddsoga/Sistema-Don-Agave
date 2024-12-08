@@ -22,7 +22,7 @@ public class MDVentas {
     @EJB
     private VentasFacade ventasFacade;
     
-    public void insertarReserva(Ventas v) {
+    public void insertarVentas(Ventas v) {
         ventasFacade.create(v);
     }
     

@@ -62,4 +62,8 @@ public class ADProducto implements Serializable {
         return mDProductos.productos();
     }
     
+    public Productos getUnProducto(int i){
+        return mDProductos.getUnProducto(i);
+    }
+    
 }
