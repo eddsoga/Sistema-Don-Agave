@@ -13,6 +13,8 @@ import javax.faces.context.FacesContext;
 import manipuladatos.MDProductos;
 import Modelo.Productos;
 import java.util.List;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 
 /**
  *
@@ -64,6 +66,55 @@ public class ADProducto implements Serializable {
     
     public Productos getUnProducto(int i){
         return mDProductos.getUnProducto(i);
+    }
+    
+    //VERIFICADORES
+    public void vExistencia(FacesContext contexto, UIComponent obp, Object valor) {
+        int existencia = (int) valor;
+        UIInput ciu = (UIInput) obp;
+        if (existencia <= 0) {
+            ciu.setValid(false); //error
+            FacesMessage mensaje1 = new FacesMessage("La existencia de prodcutos debe ser mayor a 0");
+            contexto.addMessage(ciu.getClientId(contexto), mensaje1);
+        }
+    }
+    
+    public void vStockIdeal(FacesContext contexto, UIComponent obp, Object valor) {
+        int stockIdeal = (int) valor;
+        UIInput ciu = (UIInput) obp;
+        if (stockIdeal <= 0) {
+            ciu.setValid(false); //error
+            FacesMessage mensaje1 = new FacesMessage("El Stock ideal debe ser mayor a 0");
+            contexto.addMessage(ciu.getClientId(contexto), mensaje1);
+        }
+    }
+    
+    public void vPrecioCompra(FacesContext contexto, UIComponent obp, Object valor) {
+        double precioCompra = (double) valor;
+        UIInput ciu = (UIInput) obp;
+        if (precioCompra <= 0) {
+            ciu.setValid(false); //error
+            FacesMessage mensaje1 = new FacesMessage("El precio de compra debe ser mayor a 0");
+            contexto.addMessage(ciu.getClientId(contexto), mensaje1);
+        }
+    }
+    public void vPrecioVenta(FacesContext contexto, UIComponent obp, Object valor) {
+        double precioVenta = (double) valor;
+        UIInput ciu = (UIInput) obp;
+        if (precioVenta <= 0) {
+            ciu.setValid(false); //error
+            FacesMessage mensaje1 = new FacesMessage("El precio de compra debe ser mayor a 0");
+            contexto.addMessage(ciu.getClientId(contexto), mensaje1);
+        }
+    }
+    public void vNombreProducto(FacesContext contexto, UIComponent obp, Object valor) {
+        String nombreP = (String) valor;
+        UIInput ciu = (UIInput) obp;
+        if (nombreP.isBlank() || nombreP.isEmpty()) {
+            ciu.setValid(false); //error
+            FacesMessage mensaje1 = new FacesMessage("El nombre del producto es obligatorio");
+            contexto.addMessage(ciu.getClientId(contexto), mensaje1);
+        }
     }
     
 }

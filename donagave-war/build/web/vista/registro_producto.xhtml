@@ -18,7 +18,7 @@
                         <h1><h:outputText value="Create/Edit"/></h1>
                         <h:panelGrid columns="2">
                             <h:outputLabel value="NombreProducto:" for="nombreProducto" />
-                            <h:inputText id="nombreProducto" value="#{aDProducto.producto.nombreProducto}" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
+                            <h:inputText id="nombreProducto" value="#{aDProducto.producto.nombreProducto}" validator="#{aDProducto.vNombreProducto}" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
                             <h:outputLabel value="TipoProducto:" for="tipoProducto" />
                             
                             <h:selectOneMenu id="tipoProducto" value="#{aDProducto.producto.tipoProducto}" title="TipoProducto" required="true" requiredMessage="El campo Tipo Producto es obligatorio." class="form-select">
@@ -28,13 +28,13 @@
                                 <f:selectItem itemValue="Mezcal" itemLabel="Mezcal" />
                             </h:selectOneMenu>
                             <h:outputLabel value="Existencia:" for="existencia" />
-                            <h:inputText id="existencia" value="#{aDProducto.producto.existencia}" title="Existencia" />
+                            <h:inputText id="existencia" value="#{aDProducto.producto.existencia}" validator="#{aDProducto.vExistencia}"  title="Existencia" required="true" requiredMessage="The Existencia field is required."/>
                             <h:outputLabel value="StockIdeal:" for="stockIdeal" />
-                            <h:inputText id="stockIdeal" value="#{aDProducto.producto.stockIdeal}" title="StockIdeal" required="true" requiredMessage="The StockIdeal field is required."/>
+                            <h:inputText id="stockIdeal" value="#{aDProducto.producto.stockIdeal}" title="StockIdeal" validator="#{aDProducto.vStockIdeal}"  required="true" requiredMessage="The StockIdeal field is required."/>
                             <h:outputLabel value="PrecioCompra:" for="precioCompra" />
-                            <h:inputText id="precioCompra" value="#{aDProducto.producto.precioCompra}" title="PrecioCompra" required="true" requiredMessage="The PrecioCompra field is required."/>
+                            <h:inputText id="precioCompra" value="#{aDProducto.producto.precioCompra}" title="PrecioCompra" validator="#{aDProducto.vPrecioCompra}"  required="true" requiredMessage="The PrecioCompra field is required."/>
                             <h:outputLabel value="PrecioVenta:" for="precioVenta" />
-                            <h:inputText id="precioVenta" value="#{aDProducto.producto.precioVenta}" title="PrecioVenta" required="true" requiredMessage="The PrecioVenta field is required."/>
+                            <h:inputText id="precioVenta" value="#{aDProducto.producto.precioVenta}" title="PrecioVenta" validator="#{aDProducto.vPrecioVenta}"  required="true" requiredMessage="The PrecioVenta field is required."/>
                             <p:commandButton value="Registrar" actionListener="#{aDProducto.registroProducto()}" class="btn btn-success" ajax="false" update="messages"  />
                         </h:panelGrid>
                     </h:form>

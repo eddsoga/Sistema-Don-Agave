@@ -20,18 +20,18 @@
                         <h1><h:outputText value="Agendar Reserva"/></h1>
                         <p:panelGrid columns="2">
                             <p:outputLabel value="FechaReserva:" for="fechaReserva" />
-                            <p:calendar id="fechaReserva" value="#{aDReservas.reserva.fechaReserva}" required="true" title="Fecha" mode="popup" showOn="button" pattern="dd/MM/yyyy"
+                            <p:calendar id="fechaReserva" value="#{aDReservas.reserva.fechaReserva}" validator="#{aDReservas.validarFechaReserva}" required="true" title="Fecha" mode="popup" showOn="button" pattern="dd/MM/yyyy"
                                         timeZone="America/Mexico_City" />
                             <p:outputLabel value="HoraReserva:" for="horaReserva" />
-                            <p:inputText id="horaReserva" value="#{aDReservas.reserva.horaReserva}" title="HoraReserva" required="true" requiredMessage="The HoraReserva field is required.">
-                                <f:convertDateTime pattern="HH:mm:ss" />
+                            <p:inputText id="horaReserva" value="#{aDReservas.reserva.horaReserva}" validator="#{aDReservas.vHoraReserva}" title="HoraReserva" required="true" requiredMessage="The HoraReserva field is required.">
+                                <f:convertDateTime pattern="HH:mm" timeZone="America/Mexico_City" />
                             </p:inputText>
                             <p:outputLabel value="NombreCliente:" for="nombreCliente" />
-                            <p:inputText id="nombreCliente" value="#{aDReservas.reserva.nombreCliente}" title="NombreCliente" required="true" requiredMessage="The NombreCliente field is required."/>
+                            <p:inputText id="nombreCliente" value="#{aDReservas.reserva.nombreCliente}" validator="#{aDReservas.vNombreCliente}" title="NombreCliente" required="true" requiredMessage="The NombreCliente field is required."/>
                             <p:outputLabel value="NumPersonas:" for="numPersonas" />
-                            <p:inputText id="numPersonas" value="#{aDReservas.reserva.numPersonas}" title="NumPersonas" required="true" requiredMessage="The NumPersonas field is required."/>
+                            <p:inputText id="numPersonas" value="#{aDReservas.reserva.numPersonas}" validator="#{aDReservas.vNumPersonas}" title="NumPersonas" required="true" requiredMessage="The NumPersonas field is required."/>
                             <p:outputLabel value="LugarAsignada:" for="lugarAsignada" />
-                            <p:inputText id="lugarAsignada" value="#{aDReservas.reserva.lugarAsignada}" title="LugarAsignada" required="true" requiredMessage="The LugarAsignada field is required."/>
+                            <p:inputText id="lugarAsignada" value="#{aDReservas.reserva.lugarAsignada}" validator="#{aDReservas.vLugarAsignado}" title="LugarAsignada" required="true" requiredMessage="The LugarAsignada field is required."/>
                             <p:outputLabel value="EstadoReserva:" for="estadoReserva" />
                             <p:selectOneMenu id="estadoReserva" value="#{aDReservas.reserva.estadoReserva}" required="true" requiredMessage="El campo estado Reserva es obligatorio.">
                                 <f:selectItem itemValue="" itemLabel="Seleccione proveedor" noSelectionOption="true" />
