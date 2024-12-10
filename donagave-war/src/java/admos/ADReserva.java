@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 
 /**
  *
@@ -32,6 +34,7 @@ public class ADReserva implements Serializable {
     @EJB
     private MDReservas mDreserva;
     private Reservasmesas reserva;
+    private BarChartModel estadoReservaChart;
 
     public ADReserva() {
         reserva = new Reservasmesas();
@@ -160,6 +163,48 @@ public class ADReserva implements Serializable {
             FacesMessage mensaje = new FacesMessage("La hora de reserva debe estar entre 12:00 y 23:00.");
             contexto.addMessage(componente.getClientId(contexto), mensaje);
         }
+    }
+
+    //MÈTODOS PARA GRAFICACIÒN
+    public BarChartModel getEstadoReservaChart() {
+        createEstadoReservaChart();
+        return estadoReservaChart;
+    }
+    public double promedioPersonasReservas(){
+        return mDreserva.contarPromedioPersonas();
+    }
+
+    public void setEstadoReservaChart(BarChartModel estadoReservaChart) {
+        this.estadoReservaChart = estadoReservaChart;
+    }
+
+    private void createEstadoReservaChart() {
+        estadoReservaChart = new BarChartModel();
+
+        // Datos de ejemplo para las reservas
+        ChartSeries pendiente = new ChartSeries();
+        pendiente.setLabel("Pendiente");
+        pendiente.set("Pendiente", mDreserva.contarReservasPorEstado("Pendiente"));
+
+        ChartSeries realizada = new ChartSeries();
+        realizada.setLabel("Realizada");
+        realizada.set("Realizada", mDreserva.contarReservasPorEstado("Realizada"));
+
+        estadoReservaChart.addSeries(pendiente);
+        estadoReservaChart.addSeries(realizada);
+        estadoReservaChart.setAnimate(true);
+        estadoReservaChart.setShowDatatip(true);
+        estadoReservaChart.setShowPointLabels(true);
+        estadoReservaChart.setTitle("Reservas por Estado");
+        estadoReservaChart.setLegendPosition("e"); // Posición de la leyenda (e = este, w = oeste, n = norte, s = sur)
+        estadoReservaChart.setShadow(false); // Quitar sombra (opcional)
+    }
+    
+    public long cReservasAnioo(){
+        return mDreserva.cReservasAnioo();
+    }
+    public long cReservasMes(){
+        return mDreserva.cReservasMes();
     }
 
 }

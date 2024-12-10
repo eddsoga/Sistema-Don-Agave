@@ -27,6 +27,21 @@ public class MDReservas {
     public List<Reservasmesas> reservas(){
         return reservaFacade.findAll();
     }
+    // Método para contar reservas por estado en tu EJB (MDReservas)
+    public int contarReservasPorEstado(String estado) {
+        return reservaFacade.contarPorEstado(estado);  // Asegúrate de tener este método en tu EJB
+    }
+    public double contarPromedioPersonas(){
+        return reservaFacade.promedioNumPersonas();
+    }
+    
+    public long cReservasAnioo(){
+        return reservaFacade.contarReservasEsteAnio();
+    }
+    public long cReservasMes(){
+        return reservaFacade.contarReservasEsteMes();
+    }
+            
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }
