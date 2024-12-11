@@ -5,8 +5,10 @@
 package Modelo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,12 +18,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -42,19 +46,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Ventas.findByEstadoVenta", query = "SELECT v FROM Ventas v WHERE v.estadoVenta = :estadoVenta")})
 public class Ventas implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idVenta")
-    private Integer idVenta;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechaHoraVenta")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHoraVenta;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Column(name = "cantidadProductos")
     private int cantidadProductos;
     @Basic(optional = false)
@@ -78,6 +76,14 @@ public class Ventas implements Serializable {
     @Size(max = 50)
     @Column(name = "estadoVenta")
     private String estadoVenta;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVenta")
+    private Collection<DetalleVenta> detalleVentaCollection;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idVenta")
+    private Integer idVenta;
     @JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
     @ManyToOne(optional = false)
     private Productos idProducto;
@@ -108,6 +114,48 @@ public class Ventas implements Serializable {
 
     public void setIdVenta(Integer idVenta) {
         this.idVenta = idVenta;
+    }
+
+
+    public Productos getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Productos idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public Usuarios getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuarios idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idVenta != null ? idVenta.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Ventas)) {
+            return false;
+        }
+        Ventas other = (Ventas) object;
+        if ((this.idVenta == null && other.idVenta != null) || (this.idVenta != null && !this.idVenta.equals(other.idVenta))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Modelo.Ventas[ idVenta=" + idVenta + " ]";
     }
 
     public Date getFechaHoraVenta() {
@@ -166,45 +214,13 @@ public class Ventas implements Serializable {
         this.estadoVenta = estadoVenta;
     }
 
-    public Productos getIdProducto() {
-        return idProducto;
+    @XmlTransient
+    public Collection<DetalleVenta> getDetalleVentaCollection() {
+        return detalleVentaCollection;
     }
 
-    public void setIdProducto(Productos idProducto) {
-        this.idProducto = idProducto;
-    }
-
-    public Usuarios getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Usuarios idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idVenta != null ? idVenta.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Ventas)) {
-            return false;
-        }
-        Ventas other = (Ventas) object;
-        if ((this.idVenta == null && other.idVenta != null) || (this.idVenta != null && !this.idVenta.equals(other.idVenta))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Modelo.Ventas[ idVenta=" + idVenta + " ]";
+    public void setDetalleVentaCollection(Collection<DetalleVenta> detalleVentaCollection) {
+        this.detalleVentaCollection = detalleVentaCollection;
     }
     
 }

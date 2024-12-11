@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -42,12 +43,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Productos.findByPrecioVenta", query = "SELECT p FROM Productos p WHERE p.precioVenta = :precioVenta")})
 public class Productos implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idProducto")
-    private Integer idProducto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -58,12 +53,6 @@ public class Productos implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "tipoProducto")
     private String tipoProducto;
-    @Column(name = "entrada")
-    private Integer entrada;
-    @Column(name = "salidas")
-    private Integer salidas;
-    @Column(name = "existencia")
-    private Integer existencia;
     @Basic(optional = false)
     @NotNull
     @Column(name = "stockIdeal")
@@ -76,6 +65,21 @@ public class Productos implements Serializable {
     @NotNull
     @Column(name = "precioVenta")
     private double precioVenta;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto")
+    private Collection<DetalleVenta> detalleVentaCollection;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idProducto")
+    private Integer idProducto;
+    @Column(name = "entrada")
+    private Integer entrada;
+    @Column(name = "salidas")
+    private Integer salidas;
+    @Column(name = "existencia")
+    private Integer existencia;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto")
     private List<Ventas> ventasList;
 
@@ -103,21 +107,6 @@ public class Productos implements Serializable {
         this.idProducto = idProducto;
     }
 
-    public String getNombreProducto() {
-        return nombreProducto;
-    }
-
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
-    }
-
-    public String getTipoProducto() {
-        return tipoProducto;
-    }
-
-    public void setTipoProducto(String tipoProducto) {
-        this.tipoProducto = tipoProducto;
-    }
 
     public Integer getEntrada() {
         return entrada;
@@ -143,29 +132,6 @@ public class Productos implements Serializable {
         this.existencia = existencia;
     }
 
-    public int getStockIdeal() {
-        return stockIdeal;
-    }
-
-    public void setStockIdeal(int stockIdeal) {
-        this.stockIdeal = stockIdeal;
-    }
-
-    public double getPrecioCompra() {
-        return precioCompra;
-    }
-
-    public void setPrecioCompra(double precioCompra) {
-        this.precioCompra = precioCompra;
-    }
-
-    public double getPrecioVenta() {
-        return precioVenta;
-    }
-
-    public void setPrecioVenta(double precioVenta) {
-        this.precioVenta = precioVenta;
-    }
 
     @XmlTransient
     public List<Ventas> getVentasList() {
@@ -199,6 +165,55 @@ public class Productos implements Serializable {
     @Override
     public String toString() {
         return "Modelo.Productos[ idProducto=" + idProducto + " ]";
+    }
+
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    public String getTipoProducto() {
+        return tipoProducto;
+    }
+
+    public void setTipoProducto(String tipoProducto) {
+        this.tipoProducto = tipoProducto;
+    }
+
+    public int getStockIdeal() {
+        return stockIdeal;
+    }
+
+    public void setStockIdeal(int stockIdeal) {
+        this.stockIdeal = stockIdeal;
+    }
+
+    public double getPrecioCompra() {
+        return precioCompra;
+    }
+
+    public void setPrecioCompra(double precioCompra) {
+        this.precioCompra = precioCompra;
+    }
+
+    public double getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
+    }
+
+    @XmlTransient
+    public Collection<DetalleVenta> getDetalleVentaCollection() {
+        return detalleVentaCollection;
+    }
+
+    public void setDetalleVentaCollection(Collection<DetalleVenta> detalleVentaCollection) {
+        this.detalleVentaCollection = detalleVentaCollection;
     }
     
 }
