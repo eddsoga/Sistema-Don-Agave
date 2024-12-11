@@ -18,13 +18,22 @@
                             <h1><h:outputText value="Registrar Venta"/></h1>
                             <p:panelGrid columns="2">
                                 <p:outputLabel value="FechaHoraVenta:" for="fechaHoraVenta" />
-                                <p:inputText id="fechaHoraVenta" value="#{aDVenta.venta.fechaHoraVenta}" title="FechaHoraVenta" required="true" requiredMessage="The FechaHoraVenta field is required.">
+                                <p:inputText id="fechaHoraVenta" 
+                                             value="#{aDVenta.venta.fechaHoraVenta}" 
+                                             title="FechaHoraVenta" 
+                                             readonly="true">
                                     <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                                 </p:inputText>
+                                <p:outputLabel value="IdProducto:" for="idProducto" />
+                                <p:selectOneMenu id="idProducto" value="#{aDVenta.venta.idProducto}" required="true" requiredMessage="El campo IdProducto es obligatorio.">
+                                    <f:selectItem itemLabel="Seleccione un producto" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{aDVenta.productos}" var="productos" itemValue="#{productos.idProducto}" itemLabel="#{productos.nombreProducto}" />
+                                    <p:ajax event="change" update="precioIndividual" listener="#{aDVenta.cargarPrecioIndividual}" />
+                                </p:selectOneMenu>
                                 <p:outputLabel value="CantidadProductos:" for="cantidadProductos" />
                                 <p:inputText id="cantidadProductos" value="#{aDVenta.venta.cantidadProductos}" title="CantidadProductos" required="true" requiredMessage="The CantidadProductos field is required."/>
                                 <p:outputLabel value="PrecioIndividual:" for="precioIndividual" />
-                                <p:inputText id="precioIndividual" value="#{aDVenta.venta.precioIndividual}" title="PrecioIndividual" required="true" requiredMessage="The PrecioIndividual field is required."/>
+                                <p:inputText id="precioIndividual" value="#{aDVenta.venta.precioIndividual}" title="PrecioIndividual" required="true" requiredMessage="The PrecioIndividual field is required." readonly="true"/>
                                 <p:outputLabel value="MontoTotal:" for="montoTotal" />
                                 <p:inputText id="montoTotal" value="#{aDVenta.venta.montoTotal}" title="MontoTotal" required="true" requiredMessage="The MontoTotal field is required."/>
                                 <p:outputLabel value="FormaPago:" for="formaPago" />
@@ -40,22 +49,14 @@
                                 <p:inputText id="guiaParticular" value="#{aDVenta.venta.guiaParticular}" title="GuiaParticular" required="true" requiredMessage="The GuiaParticular field is required."/>
                                 <p:outputLabel value="EstadoVenta:" for="estadoVenta" />
                                 <p:inputText id="estadoVenta" value="#{aDVenta.venta.estadoVenta}" title="EstadoVenta" />
-                                <p:outputLabel value="IdProducto:" for="idProducto" />
-                                <p:selectOneMenu id="idProducto" value="#{aDVenta.venta.idProducto}" required="true" requiredMessage="El campo IdProducto es obligatorio.">
-                                    <f:selectItem itemLabel="Seleccione un producto" itemValue="" noSelectionOption="true" />
-                                    <f:selectItems value="#{aDVenta.productos}" var="productos" itemValue="#{productos}" itemLabel="#{productos.nombreProducto}" />
-                                </p:selectOneMenu>
-                                <p:outputLabel value="IdUsuario:" for="idUsuario" />
-                                <p:selectOneMenu id="idUsuario" value="#{aDVenta.venta.idUsuario}" required="true" requiredMessage="The IdUsuario field is required.">
-                                    <f:selectItem itemLabel="Seleccione un usuario" itemValue="" noSelectionOption="true" />
-                                    <f:selectItems value="#{aDUsuario.usuarios()}" var="usuarios" itemValue="#{usuarios}" itemLabel="#{usuarios.nombre}" />
-                                </p:selectOneMenu>
+                                
+
                                 <p:commandButton value="Registrar" actionListener="#{aDVenta.registroVenta(aDVenta.venta)}" ajax="false" update="messages"/>
-                        
+
                             </p:panelGrid>
                         </h:form>
                     </f:view>
-                    
+
                     <f:view>
 
 

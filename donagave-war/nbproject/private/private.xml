@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-war/web/vista/registro_producto.xhtml</file>
-            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-war/src/java/admos/ADProducto.java</file>
-            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-war/src/java/admos/ADGasto.java</file>
-            <file>file:/C:/Users/Eduardo%20Soto/Documents/NetBeansProjects/donAgave/donagave-war/web/vista/dashboard.xhtml</file>
+            <file>file:/C:/Users/jairo/OneDrive/Documents/NetBeansProjects/Sistema-Don-Agave/donagave-war/src/java/admos/ADVenta.java</file>
+            <file>file:/C:/Users/jairo/OneDrive/Documents/NetBeansProjects/Sistema-Don-Agave/donagave-war/web/vista/ventas.xhtml</file>
         </group>
     </open-files>
 </project-private>
