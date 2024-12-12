@@ -5,6 +5,7 @@
 package manipuladatos;
 
 import Modelo.Productosventa;
+import Modelo.Ventas;
 import accesodatos.ProductosventaFacade;
 import java.util.List;
 import javax.ejb.EJB;
@@ -33,10 +34,12 @@ public class MDProductosVentas {
         return productosventaFacade.getUnProductoVenta(id);
     }
     
-    public List<Productosventa> productosIDVenta(int idventa){
+    public List<Productosventa> productosIDVenta(Ventas idventa){
         return productosventaFacade.productosIDVenta(idventa);
     }
-    
+    public List<Productosventa> getAll(){
+        return productosventaFacade.findAll();
+    }
     
     
 

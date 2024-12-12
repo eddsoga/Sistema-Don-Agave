@@ -11,7 +11,7 @@
         <ui:composition template="./../template/plantilla.xhtml">
 
             <ui:define name="content">
-                
+
                 <f:view>
 
 
@@ -40,7 +40,7 @@
                         </p:panelGrid>
                     </h:form>
                 </f:view>
-                
+
                 <h:form>
                     <h3><h:outputText value="Lista Productos"/></h3>
                     <p:dataTable value="#{aDVenta.productos}" var="item">
@@ -78,39 +78,65 @@
                             <f:facet name="header">
                                 <h:outputText value="Acciones"/>
                             </f:facet>
-                            <p:commandButton value="Agregar" style="width: 150px;"
-                                             action="detalleVenta" actionListener="#{aDProductosVentas.creaPV()}" ajax="false" update="messages"/>
+                            <p:commandButton value="Seleccionar" style="width: 150px;"
+                                             action="detalleVenta" actionListener="#{aDProductosVentas.setProductoSeleccionado(item)}" ajax="false" update="messages"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>
 
 
-                
+
+                <h:form>
+                    <h3><h:outputText value="Productos de la cuenta"/></h3>
+                    <p:dataTable value="#{aDProductosVentas.productosIDVenta(aDVenta.ventaSeleccionada)}" var="item">  
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cantidad"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre Productos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idProducto.nombreProducto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio Producto"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idProducto.precioVenta}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Subtotal"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idProducto.precioVenta * item.cantidad}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+
+
                 <f:view>
 
 
                     <h:form>
-                        <h1><h:outputText value="Create/Edit"/></h1>
+                        <h3><h:outputText value="Create/Edit"/></h3>
                         <h:panelGrid columns="2">
-                            <h:outputLabel value="IdproductosVenta:" for="idproductosVenta" />
-                            <h:inputText id="idproductosVenta" value="#{aDProductosVentas.pVentas.idproductosVenta}" title="IdproductosVenta" required="true" requiredMessage="The IdproductosVenta field is required."/>
                             <h:outputLabel value="Cantidad:" for="cantidad" />
                             <h:inputText id="cantidad" value="#{aDProductosVentas.pVentas.cantidad}" title="Cantidad" required="true" requiredMessage="The Cantidad field is required."/>
                             <h:outputLabel value="IdProducto:" for="idProducto" />
-                            <h:selectOneMenu id="idProducto" value="#{aDProductosVentas.pVentas.idProducto}" title="IdProducto" required="true" requiredMessage="The IdProducto field is required.">
-                                <!-- TODO: update below reference to list of available items-->
-                                <f:selectItems value="#{fixme}"/>
-                            </h:selectOneMenu>
-                            <h:outputLabel value="IdVenta:" for="idVenta" />
-                            <h:selectOneMenu id="idVenta" value="#{aDProductosVentas.pVentas.idVenta}" title="IdVenta" required="true" requiredMessage="The IdVenta field is required.">
-                                <!-- TODO: update below reference to list of available items-->
-                                <f:selectItems value="#{fixme}"/>
-                            </h:selectOneMenu>
+                            <h:outputLabel value="#{aDProductosVentas.productoSeleccionado.idProducto}" for="idProducto" />
+                            <h:outputLabel value="NombreProducto" for="nombreProducto" />
+                            <h:outputLabel value="#{aDProductosVentas.productoSeleccionado.nombreProducto}" for="nombreProducto" />
+                            <p:commandButton value="Seleccionar" style="width: 150px;"
+                                             action="detalleVenta" actionListener="#{aDProductosVentas.añadirArticulo(aDProductosVentas.pVentas.cantidad,aDProductosVentas.productoSeleccionado,aDVenta.ventaSeleccionada)}" ajax="false" update="messages"/>
                         </h:panelGrid>
                     </h:form>
+                    
                 </f:view>
 
-                
+
             </ui:define>
 
 

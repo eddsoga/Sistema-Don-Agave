@@ -6,6 +6,7 @@ package accesodatos;
 
 import Modelo.Productos;
 import Modelo.Productosventa;
+import Modelo.Ventas;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -31,12 +32,12 @@ public class ProductosventaFacade extends AbstractFacade<Productosventa> {
         super(Productosventa.class);
     }
     
-    public List<Productosventa> productosIDVenta(int idventa) {
+    public List<Productosventa> productosIDVenta(Ventas idventa) {
         List<Productosventa> ventas = null;
         try {
-            Query consultausuario = em.createNamedQuery("Productosventa.findByIdproductosVenta");
+            Query consultausuario = em.createNamedQuery("Productosventa.findByIdVenta");
             consultausuario.setParameter("idVenta", idventa);
-            ventas = (List<Productosventa>) consultausuario.getResultList();
+            ventas = consultausuario.getResultList();
         } catch (Exception e) {
             return null;
         }
@@ -54,5 +55,7 @@ public class ProductosventaFacade extends AbstractFacade<Productosventa> {
         }
         return p;
     }
+    
+    
     
 }

@@ -87,12 +87,13 @@ CREATE TABLE `productosventa` (
   `idProducto` int NOT NULL,
   `idVenta` int NOT NULL,
   `cantidad` int NOT NULL,
+  `subtotal` double DEFAULT '0',
   PRIMARY KEY (`idproductosVenta`),
   KEY `fk_producto_idx` (`idProducto`),
   KEY `fk_venta_idx` (`idVenta`),
   CONSTRAINT `fk_producto` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`),
   CONSTRAINT `fk_venta` FOREIGN KEY (`idVenta`) REFERENCES `ventas` (`idVenta`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,6 +102,7 @@ CREATE TABLE `productosventa` (
 
 LOCK TABLES `productosventa` WRITE;
 /*!40000 ALTER TABLE `productosventa` DISABLE KEYS */;
+INSERT INTO `productosventa` VALUES (1,7,1,0,0),(2,5,1,0,0),(3,6,1,0,0),(4,3,1,5,0),(5,1,1,5,0),(6,5,1,10,0),(7,5,1,10,0),(8,8,1,7,0);
 /*!40000 ALTER TABLE `productosventa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,4 +203,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-12  1:49:48
+-- Dump completed on 2024-12-12 13:06:38

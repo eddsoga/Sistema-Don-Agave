@@ -80,6 +80,7 @@ public class ADVenta implements Serializable {
         return productos;
     }
      
+     
     public void prepararVenta(List<Productos> productos, Usuarios vendedor){
         this.productos = productos;
         this.vendedor=vendedor;
@@ -100,10 +101,16 @@ public class ADVenta implements Serializable {
     public Usuarios getVendedor() {
         return vendedor;
     }
+    
+    public int getIDCVentaSeleccionada() {
+        return ventaSeleccionada.getIdVenta();
+    }
 
     public void setVendedor(Usuarios vendedor) {
         this.vendedor = vendedor;
     }
+    
+    
     
     
     

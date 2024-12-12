@@ -25,6 +25,7 @@ public class ADProductosVentas implements Serializable {
     @EJB
     private MDProductosVentas mDProductosVentas;
     private Productosventa pVentas;
+    private Productos productoSeleccionado;
     
 
     /**
@@ -57,14 +58,32 @@ public class ADProductosVentas implements Serializable {
         return mDProductosVentas.getUnProductoVenta(id);
     }
     
-    public List<Productosventa> productosIDVenta(int idventa){
-        return mDProductosVentas.productosIDVenta(idventa);
+    public List<Productosventa> productosIDVenta(Ventas idventa){
+        System.out.print("El idventa que se envio al metodo: "+idventa);
+        List<Productosventa> resultado=mDProductosVentas.productosIDVenta(idventa);
+        System.out.print(resultado);
+        return resultado;
     }
+
+    public Productos getProductoSeleccionado() {
+        return productoSeleccionado;
+    }
+
+    public void setProductoSeleccionado(Productos productoSeleccionado) {
+        this.productoSeleccionado = productoSeleccionado;
+    }
+    
     public void añadirArticulo(int cantidad,Productos idProducto,Ventas idVenta){
-        pVentas= new Productosventa();
+        creaPV();
         pVentas.setCantidad(cantidad);
         pVentas.setIdProducto(idProducto);
         pVentas.setIdVenta(idVenta);
+        mDProductosVentas.insertarProducto(pVentas);
+        
+    }
+    public List<Productosventa> findAll(){
+        return mDProductosVentas.getAll();
     }
     
+
 }
