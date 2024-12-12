@@ -5,10 +5,12 @@
 package admos;
 
 import Modelo.Productos;
+import Modelo.Usuarios;
 import Modelo.Ventas;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -26,7 +28,9 @@ public class ADVenta implements Serializable {
     @EJB
     private MDVentas mDVentas;
     private Ventas venta;
+    private Ventas ventaSeleccionada;
     private List<Productos> productos;
+    private Usuarios vendedor;
     
     /**
      * Creates a new instance of ADVenta
@@ -59,9 +63,12 @@ public class ADVenta implements Serializable {
         venta=new Ventas();
     }
      public void registroVenta() {
-        if (venta.getCantidadProductos()== 0 || venta.getEstadoVenta()== null || venta.getFechaHoraVenta()== null || venta.getFormaPago() == null ||venta.getGuiaParticular()== null || venta.getIdProducto() == null || venta.getIdUsuario()== null || venta.getIdVenta()== null || venta.getMontoTotal()==0) {
+        if (venta.getEstadoVenta()== null || venta.getFechaHoraVenta()== null || venta.getFormaPago() == null ||venta.getGuiaParticular()== null || venta.getMontoTotal()==0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Todos los campos son obligatorios", ""));
         }
+        venta.setMontoTotal(0.0);
+        venta.setFechaHoraVenta(new Date());
+        venta.setIdUsuario(vendedor);
         mDVentas.insertarVentas(venta);
         venta = new Ventas();
         FacesContext.getCurrentInstance().addMessage(null,
@@ -72,10 +79,32 @@ public class ADVenta implements Serializable {
      public List<Productos> getProductos() {
         return productos;
     }
+     
+    public void prepararVenta(List<Productos> productos, Usuarios vendedor){
+        this.productos = productos;
+        this.vendedor=vendedor;
+    }
 
     public void setProductos(List<Productos> productos) {
         this.productos = productos;
     }
+
+    public Ventas getVentaSeleccionada() {
+        return ventaSeleccionada;
+    }
+
+    public void setVentaSeleccionada(Ventas ventaSeleccionada) {
+        this.ventaSeleccionada = ventaSeleccionada;
+    }
+
+    public Usuarios getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Usuarios vendedor) {
+        this.vendedor = vendedor;
+    }
+    
     
     
 

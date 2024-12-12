@@ -30,25 +30,13 @@
                 margin-bottom: 20px;
                 color: #333;
             }
-            .btn-primary {
-                width: 100%;
-                background-color: #1d9bf0;
-                border-color: #1d9bf0;
-            }
-            .btn-primary:hover {
-                background-color: #1a8cd8;
-            }
-            .btn-secondary {
-                margin-top: 10px;
-                background-color: #009900;
-                width: 100%;
-            }
+            
         </style>
     </h:head>
     <h:body>
         <div class="login-container">
             <p:growl id="messsages"/>
-            <h2>SISTEMA DON AGAVE</h2>
+            <img src="https://d26lpennugtm8s.cloudfront.net/stores/001/008/550/rte/logo%20don%20agave1.jpg " style="width: 60%;"></img>
             <f:view>
                 <!-- Formulario de login -->
                 <h:form>
@@ -61,13 +49,13 @@
                         <p:password id="password" class="form-control" value="#{aDUsuario.usuario.password}" title="Password" required="true" placeholder="Contraseña" />
                     </div>
                     <!-- Botón Ingresar -->
-                    <p:commandButton value="Ingresar" class="btn btn-primary" action="#{aDUsuario.pagina}" actionListener="#{aDUsuario.autenticar}" ajax="false"
+                    <p:commandButton value="Ingresar" class="m-3" action="#{aDUsuario.pagina}" actionListener="#{aDUsuario.autenticar}" ajax="false"
                                                      update="messsages"
                                                      />
                 </h:form>
                 <!-- Botón Registro Persona -->
                 <h:form>
-                    <h:commandButton value="Registro Persona" class="btn btn-secondary" action="registro_usuario" />
+                    <h:commandButton value="Registrar Usuario" class="btn btn-secondary" action="registro_usuario" />
                 </h:form>
             </f:view> 
         </div>

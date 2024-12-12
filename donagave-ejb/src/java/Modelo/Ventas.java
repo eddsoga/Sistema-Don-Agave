@@ -34,8 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Ventas.findAll", query = "SELECT v FROM Ventas v"),
     @NamedQuery(name = "Ventas.findByIdVenta", query = "SELECT v FROM Ventas v WHERE v.idVenta = :idVenta"),
     @NamedQuery(name = "Ventas.findByFechaHoraVenta", query = "SELECT v FROM Ventas v WHERE v.fechaHoraVenta = :fechaHoraVenta"),
-    @NamedQuery(name = "Ventas.findByCantidadProductos", query = "SELECT v FROM Ventas v WHERE v.cantidadProductos = :cantidadProductos"),
-    @NamedQuery(name = "Ventas.findByPrecioIndividual", query = "SELECT v FROM Ventas v WHERE v.precioIndividual = :precioIndividual"),
     @NamedQuery(name = "Ventas.findByMontoTotal", query = "SELECT v FROM Ventas v WHERE v.montoTotal = :montoTotal"),
     @NamedQuery(name = "Ventas.findByFormaPago", query = "SELECT v FROM Ventas v WHERE v.formaPago = :formaPago"),
     @NamedQuery(name = "Ventas.findByGuiaParticular", query = "SELECT v FROM Ventas v WHERE v.guiaParticular = :guiaParticular"),
@@ -55,14 +53,6 @@ public class Ventas implements Serializable {
     private Date fechaHoraVenta;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cantidadProductos")
-    private int cantidadProductos;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "precioIndividual")
-    private double precioIndividual;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "montoTotal")
     private double montoTotal;
     @Basic(optional = false)
@@ -78,9 +68,6 @@ public class Ventas implements Serializable {
     @Size(max = 50)
     @Column(name = "estadoVenta")
     private String estadoVenta;
-    @JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
-    @ManyToOne(optional = false)
-    private Productos idProducto;
     @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)
     private Usuarios idUsuario;
@@ -92,11 +79,9 @@ public class Ventas implements Serializable {
         this.idVenta = idVenta;
     }
 
-    public Ventas(Integer idVenta, Date fechaHoraVenta, int cantidadProductos, double precioIndividual, double montoTotal, String formaPago, String guiaParticular) {
+    public Ventas(Integer idVenta, Date fechaHoraVenta, double montoTotal, String formaPago, String guiaParticular) {
         this.idVenta = idVenta;
         this.fechaHoraVenta = fechaHoraVenta;
-        this.cantidadProductos = cantidadProductos;
-        this.precioIndividual = precioIndividual;
         this.montoTotal = montoTotal;
         this.formaPago = formaPago;
         this.guiaParticular = guiaParticular;
@@ -116,22 +101,6 @@ public class Ventas implements Serializable {
 
     public void setFechaHoraVenta(Date fechaHoraVenta) {
         this.fechaHoraVenta = fechaHoraVenta;
-    }
-
-    public int getCantidadProductos() {
-        return cantidadProductos;
-    }
-
-    public void setCantidadProductos(int cantidadProductos) {
-        this.cantidadProductos = cantidadProductos;
-    }
-
-    public double getPrecioIndividual() {
-        return precioIndividual;
-    }
-
-    public void setPrecioIndividual(double precioIndividual) {
-        this.precioIndividual = precioIndividual;
     }
 
     public double getMontoTotal() {
@@ -164,14 +133,6 @@ public class Ventas implements Serializable {
 
     public void setEstadoVenta(String estadoVenta) {
         this.estadoVenta = estadoVenta;
-    }
-
-    public Productos getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(Productos idProducto) {
-        this.idProducto = idProducto;
     }
 
     public Usuarios getIdUsuario() {

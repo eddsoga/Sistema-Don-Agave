@@ -29,6 +29,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         super(Usuarios.class);
     }
     
+    
     public Usuarios usuario_usu_pass(String usuario, String password) {
         Usuarios persona = null;
         try {

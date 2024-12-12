@@ -39,12 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuarios.findByUsuarioPassword", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario AND u.password = :password")})
 public class Usuarios implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idUsuario")
-    private Integer idUsuario;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -65,6 +59,13 @@ public class Usuarios implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "password")
     private String password;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idUsuario")
+    private Integer idUsuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<Ventas> ventasList;
 
@@ -91,37 +92,6 @@ public class Usuarios implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @XmlTransient
     public List<Ventas> getVentasList() {
@@ -155,6 +125,38 @@ public class Usuarios implements Serializable {
     @Override
     public String toString() {
         return "Modelo.Usuarios[ idUsuario=" + idUsuario + " ]";
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

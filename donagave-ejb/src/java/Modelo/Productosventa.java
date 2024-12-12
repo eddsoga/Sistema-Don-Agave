@@ -29,9 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Productosventa.findAll", query = "SELECT p FROM Productosventa p"),
     @NamedQuery(name = "Productosventa.findByIdproductosVenta", query = "SELECT p FROM Productosventa p WHERE p.idproductosVenta = :idproductosVenta"),
-    @NamedQuery(name = "Productosventa.findByCantidad", query = "SELECT p FROM Productosventa p WHERE p.cantidad = :cantidad"),
-    @NamedQuery(name = "Productosventa.findByPrecioIndividual", query = "SELECT p FROM Productosventa p WHERE p.precioIndividual = :precioIndividual"),
-    @NamedQuery(name = "Productosventa.findByTotalProducto", query = "SELECT p FROM Productosventa p WHERE p.totalProducto = :totalProducto")})
+    @NamedQuery(name = "Productosventa.findByIdVenta", query = "SELECT p FROM Productosventa p WHERE p.idVenta = :idVenta"),
+    @NamedQuery(name = "Productosventa.findByCantidad", query = "SELECT p FROM Productosventa p WHERE p.cantidad = :cantidad")})
 public class Productosventa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,14 +43,6 @@ public class Productosventa implements Serializable {
     @NotNull
     @Column(name = "cantidad")
     private int cantidad;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "precioIndividual")
-    private float precioIndividual;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "totalProducto")
-    private float totalProducto;
     @JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
     @ManyToOne(optional = false)
     private Productos idProducto;
@@ -66,11 +57,9 @@ public class Productosventa implements Serializable {
         this.idproductosVenta = idproductosVenta;
     }
 
-    public Productosventa(Integer idproductosVenta, int cantidad, float precioIndividual, float totalProducto) {
+    public Productosventa(Integer idproductosVenta, int cantidad) {
         this.idproductosVenta = idproductosVenta;
         this.cantidad = cantidad;
-        this.precioIndividual = precioIndividual;
-        this.totalProducto = totalProducto;
     }
 
     public Integer getIdproductosVenta() {
@@ -87,22 +76,6 @@ public class Productosventa implements Serializable {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }
-
-    public float getPrecioIndividual() {
-        return precioIndividual;
-    }
-
-    public void setPrecioIndividual(float precioIndividual) {
-        this.precioIndividual = precioIndividual;
-    }
-
-    public float getTotalProducto() {
-        return totalProducto;
-    }
-
-    public void setTotalProducto(float totalProducto) {
-        this.totalProducto = totalProducto;
     }
 
     public Productos getIdProducto() {

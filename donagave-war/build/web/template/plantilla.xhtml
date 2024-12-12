@@ -20,9 +20,9 @@
                 <div class="container d-flex justify-content-between align-items-center">
                     <!-- Nombre o Logo -->
                     <div class="d-flex align-items-center">
-                        <i style="color: black" class="bi bi-bag-check-fill h1"></i>
-
-                        <h5 class="m-3 fw-bold text-dark">  Sistema de Ventas Don Agave</h5>
+                        <img class="rounded" src="https://d26lpennugtm8s.cloudfront.net/stores/001/008/550/rte/logo%20don%20agave1.jpg "
+                             style="width: 15%;"></img>
+                        <h5 class="m-3 fw-bold text-dark">  Sistema Don Agave</h5>
                     </div>
 
                     <!-- Detalles adicionales -->
@@ -41,7 +41,7 @@
                         <h:commandButton value="Inicio" class="btn btn-secondary m-2" style="width: 150px;"
                                          action="dashboard"/>
                         <h:commandButton value="Realizar Venta" class="btn btn-secondary m-2" style="width: 150px;"
-                                         action="ventas" actionListener="#{aDVenta.setProductos(aDProducto.getProductos())}" />
+                                         action="ventas" actionListener="#{aDVenta.prepararVenta(aDProducto.getProductos(),aDUsuario.usuario)}" />
                         <h:commandButton value="Registrar gasto" class="btn btn-secondary m-2" style="width: 150px;"
                                          action="registro_gasto" />
                         <!-- <h:commandButton value="Registrar usuario" class="btn btn-secondary m-2" style="width: 150px;"
@@ -72,8 +72,10 @@
                         <div class="row">
                             <!-- Logo o Título -->
                             <div class="col-md-4 text-center text-md-start">
-                                <h5 class="text-uppercase">Mi Aplicación</h5>
-                                <p class="small">Promoviendo la salud y bienestar con tecnología.</p>
+                                <h5 class="text-uppercase">Misión:</h5>
+                                <p class="small">
+                                    "Preservar y compartir la tradición ancestral y artesanal de la elaboración del mezcal oaxaqueño, brindando a turistas nacionales e internacionales una experiencia única que resalte la riqueza cultural de Oaxaca. A través de la modernización de nuestros procesos y la utilización de plataformas digitales, buscamos distribuir nuestros productos a nivel global, generando empleo y bienestar para las familias oaxaqueñas."
+                                    .</p>
                             </div>
 
                             <!-- Navegación rápida -->
@@ -101,8 +103,8 @@
                             <!-- Información de contacto -->
                             <div class="col-md-4 text-center text-md-end">
                                 <h5 class="text-uppercase">Contacto</h5>
-                                <p class="small mb-1">Correo: contacto@miaplicacion.com</p>
-                                <p class="small">Teléfono: +52 555-123-4567</p>
+                                <p class="small mb-1">Correo: comercializadora.xagga@gmail.com</p>
+                                <p class="small">Teléfono: +52 951-199-13-50</p>
                             </div>
                         </div>
 
