@@ -50,6 +50,8 @@
                                          action="registro_reserva"/>
                         <h:commandButton value="Inventario" class="btn btn-secondary m-2" style="width: 150px;"
                                          action="registro_producto" />
+                        <h:commandButton value="Pedidos" class="btn btn-secondary m-2" style="width: 150px;" actionListener="#{aDProducto.cargarProductos()}"
+                                         action="pedidos_producto" />
                         <h:commandButton value="Cerrar Sesión" class="btn btn-danger m-2" style="width: 150px;"
                                          action="#{aDUsuario.pagina()}" actionListener="#{aDUsuario.logout}" />
 
@@ -94,6 +96,8 @@
                                                      action="registro_reserva"/>
                                     <h:commandButton value="Inventario" class="btn btn-secondary m-2" style="width: 150px;"
                                                      action="registro_producto" />
+                                    <h:commandButton value="Pedidos" class="btn btn-secondary m-2" style="width: 150px;" actionListener="#{aDProducto.cargarProductos()}"
+                                                     action="pedidos_producto" />
                                     <h:commandButton value="Cerrar Sesión" class="btn btn-danger m-2" style="width: 150px;"
                                                      action="#{aDUsuario.pagina()}" actionListener="#{aDUsuario.logout}" />
 

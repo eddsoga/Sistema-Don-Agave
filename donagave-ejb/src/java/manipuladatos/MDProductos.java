@@ -27,6 +27,9 @@ public class MDProductos {
     public List<Productos> productos(){
         return productosFacade.findAll();
     }
+    public List<Productos> pedido(String pedido){
+        return productosFacade.getPedido(pedido);
+    }
     public Productos getUnProducto(int id){
         return productosFacade.getUnProducto(id);
     }

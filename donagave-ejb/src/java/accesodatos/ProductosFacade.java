@@ -5,6 +5,7 @@
 package accesodatos;
 
 import Modelo.Productos;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,4 +42,15 @@ public class ProductosFacade extends AbstractFacade<Productos> {
         return p;
     }
     
+    public List<Productos> getPedido(String pedido) {
+        List<Productos> p = null;
+        try {
+            Query consultausuario = em.createNamedQuery("Productos.findByPedido");
+            consultausuario.setParameter("tipoProducto", pedido);
+            p = (List<Productos>) consultausuario.getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        return p;
+    }
 }
