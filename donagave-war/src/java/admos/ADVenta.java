@@ -76,7 +76,8 @@ public class ADVenta implements Serializable {
                         "Venta registrada correctamente.", "Venta registrado correctamente."));
 
     }
-     public List<Productos> getProductos() {
+     
+    public List<Productos> getProductos() {
         return productos;
     }
      
