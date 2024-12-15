@@ -33,6 +33,9 @@ public class MDProductos {
     public Productos getUnProducto(int id){
         return productosFacade.getUnProducto(id);
     }
+    public void actualizarProducto(Productos p) {
+        productosFacade.edit(p);
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

@@ -5,7 +5,11 @@
         <group>
             <file>file:/C:/Users/jairo/OneDrive/Documents/GitHub/Sistema-Don-Agave/donagave-war/web/vista/ventas.xhtml</file>
             <file>file:/C:/Users/jairo/OneDrive/Documents/GitHub/Sistema-Don-Agave/donagave-war/web/template/plantilla.xhtml</file>
+            <file>file:/C:/Users/jairo/OneDrive/Documents/GitHub/Sistema-Don-Agave/donagave-war/web/vista/registro_producto.xhtml</file>
             <file>file:/C:/Users/jairo/OneDrive/Documents/GitHub/Sistema-Don-Agave/donagave-war/src/java/admos/ADVenta.java</file>
+            <file>file:/C:/Users/jairo/OneDrive/Documents/GitHub/Sistema-Don-Agave/donagave-war/web/vista/registro_usuario.xhtml</file>
+            <file>file:/C:/Users/jairo/OneDrive/Documents/GitHub/Sistema-Don-Agave/donagave-war/src/java/admos/ADProducto.java</file>
+            <file>file:/C:/Users/jairo/OneDrive/Documents/GitHub/Sistema-Don-Agave/donagave-war/src/java/admos/ADUsuario.java</file>
         </group>
     </open-files>
 </project-private>

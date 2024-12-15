@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../template/plantilla.xhtml">
+
+            <ui:define name="content">
+                <center>
+                    <f:view>
+                        <h:form>
+                            <h1><h:outputText value="Editar producto"/></h1>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="NombreProducto:" for="nombreProducto" />
+                                <h:inputText id="nombreProducto" value="#{aDProducto.producto.nombreProducto}" validator="#{aDProducto.vNombreProducto}" title="NombreProducto" required="true" readonly="true"/>
+                                <h:outputLabel value="TipoProducto:" for="tipoProducto" />
+
+                                <h:selectOneMenu id="tipoProducto" value="#{aDProducto.producto.tipoProducto}" title="TipoProducto" required="true" requiredMessage="El campo Tipo Producto es obligatorio." class="form-select" readonly="true">
+                                    <f:selectItem itemValue="" itemLabel="Seleccione Tipo de Producto" noSelectionOption="true" />
+                                    <f:selectItem itemValue="Comida" itemLabel="Comida" />
+                                    <f:selectItem itemValue="Bebida" itemLabel="Bebida" />
+                                    <f:selectItem itemValue="Mezcal" itemLabel="Mezcal" />
+                                </h:selectOneMenu>
+                                <h:outputLabel value="Existencia:" for="existencia" />
+                                <h:inputText id="existencia" value="#{aDProducto.producto.existencia}" validator="#{aDProducto.vExistencia}"  title="Existencia" required="true" requiredMessage="The Existencia field is required." readonly="true" />
+                                <h:outputLabel value="StockIdeal:" for="stockIdeal" />
+                                <h:inputText id="stockIdeal" value="#{aDProducto.producto.stockIdeal}" title="StockIdeal" validator="#{aDProducto.vStockIdeal}"  required="true" requiredMessage="The StockIdeal field is required."/>
+                                <h:outputLabel value="PrecioCompra:" for="precioCompra" />
+                                <h:inputText id="precioCompra" value="#{aDProducto.producto.precioCompra}" title="PrecioCompra" validator="#{aDProducto.vPrecioCompra}"  required="true" requiredMessage="The PrecioCompra field is required."/>
+                                <h:outputLabel value="PrecioVenta:" for="precioVenta" />
+                                <h:inputText id="precioVenta" value="#{aDProducto.producto.precioVenta}" title="PrecioVenta" validator="#{aDProducto.vPrecioVenta}"  required="true" requiredMessage="The PrecioVenta field is required."/>
+                                <h:commandButton value="Guardar Cambios" action="#{aDProducto.actualizarProducto()}" styleClass="btn btn-primary"  ajax="false" update="messages" />
+                                <h:commandButton value="Cancelar" action="registro_producto" styleClass="btn btn-secondary" />
+                            </h:panelGrid>
+                        </h:form>
+                    </f:view>
+                </center>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
