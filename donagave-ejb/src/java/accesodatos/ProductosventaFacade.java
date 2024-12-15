@@ -4,7 +4,6 @@
  */
 package accesodatos;
 
-import Modelo.Productos;
 import Modelo.Productosventa;
 import Modelo.Ventas;
 import java.util.List;
@@ -55,7 +54,6 @@ public class ProductosventaFacade extends AbstractFacade<Productosventa> {
         }
         return p;
     }
-    
     
     
 }

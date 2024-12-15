@@ -200,14 +200,5 @@ public class ADProducto implements Serializable {
         initExistenciaModel(); // Calcula antes de devolver el modelo
         return existenciaModel;
     }
-    private List<Productos> productosPedido;
-
-    public void cargarProductos() {
-        String tipoProducto="Mezcal";
-        productosPedido = mDProductos.pedido(tipoProducto);
-    }
-
-    public List<Productos> getProductosPedido() {
-        return productosPedido;
-    }
+    
 }

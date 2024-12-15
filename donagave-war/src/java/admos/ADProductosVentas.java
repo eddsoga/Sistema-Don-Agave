@@ -12,6 +12,10 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
 import manipuladatos.MDProductosVentas;
 
 /**
@@ -24,9 +28,9 @@ public class ADProductosVentas implements Serializable {
 
     @EJB
     private MDProductosVentas mDProductosVentas;
+
     private Productosventa pVentas;
     private Productos productoSeleccionado;
-    
 
     /**
      * Creates a new instance of ADProductosVentas
@@ -34,8 +38,9 @@ public class ADProductosVentas implements Serializable {
     public ADProductosVentas() {
         creaPV();
     }
-    public void creaPV(){
-        pVentas= new Productosventa();
+
+    public void creaPV() {
+        pVentas = new Productosventa();
     }
 
     public MDProductosVentas getmDProductosVentas() {
@@ -53,14 +58,21 @@ public class ADProductosVentas implements Serializable {
     public void setpVentas(Productosventa pVentas) {
         this.pVentas = pVentas;
     }
-    
-    public Productosventa getUnProductoVenta(int id){
+
+    public Productosventa getUnProductoVenta(int id) {
         return mDProductosVentas.getUnProductoVenta(id);
     }
-    
-    public List<Productosventa> productosIDVenta(Ventas idventa){
-        System.out.print("El idventa que se envio al metodo: "+idventa);
-        List<Productosventa> resultado=mDProductosVentas.productosIDVenta(idventa);
+
+    public boolean isPSNull() {
+        if (productoSeleccionado != null) {
+            return false;
+        }
+        return true;
+    }
+
+    public List<Productosventa> productosIDVenta(Ventas idventa) {
+        System.out.print("El idventa que se envio al metodo: " + idventa);
+        List<Productosventa> resultado = mDProductosVentas.productosIDVenta(idventa);
         System.out.print(resultado);
         return resultado;
     }
@@ -72,18 +84,87 @@ public class ADProductosVentas implements Serializable {
     public void setProductoSeleccionado(Productos productoSeleccionado) {
         this.productoSeleccionado = productoSeleccionado;
     }
-    
-    public void añadirArticulo(int cantidad,Productos idProducto,Ventas idVenta){
-        creaPV();
-        pVentas.setCantidad(cantidad);
-        pVentas.setIdProducto(idProducto);
-        pVentas.setIdVenta(idVenta);
-        mDProductosVentas.insertarProducto(pVentas);
-        
+
+    public double eliminarArticulo(Ventas idVenta, Productosventa producto) {
+        List<Productosventa> lista = mDProductosVentas.productosIDVenta(idVenta);
+        Productosventa existente = null;
+        for (Productosventa item : lista) {
+            if (item.getIdProducto().equals(producto.getIdProducto()) && item.getIdVenta().equals(idVenta)) {
+                existente = item;
+                System.out.print("Prodcuto Encontrado");
+                break;
+            }
+        }
+        if (existente != null) {
+            // Si existe, lo elimina
+            mDProductosVentas.borrarProductoVenta(existente); // borramos el prodcuto
+            System.out.print("Producto Eliminado");
+        }
+        try {
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        //Actualizamos la lista local
+        lista = mDProductosVentas.productosIDVenta(idVenta);
+        return getTotalVenta(lista);
+
     }
-    public List<Productosventa> findAll(){
+
+    public double añadirArticulo(int cantidad, Productos idProducto, Ventas idVenta, List<Productosventa> lista) {
+        // Busca si el producto ya está en la lista
+        Productosventa existente = null;
+
+        for (Productosventa item : lista) {
+            if (item.getIdProducto().equals(idProducto) && item.getIdVenta().equals(idVenta)) {
+                existente = item;
+                break;
+            }
+        }
+
+        if (existente != null) {
+            // Si existe, actualiza la cantidad y el subtotal
+            existente.setCantidad(existente.getCantidad() + cantidad);
+            existente.setSubtotal(existente.getCantidad() * idProducto.getPrecioVenta());
+            mDProductosVentas.actualizarProductoVenta(existente); // Asegúrate de tener este método
+        } else {
+            // Si no existe, crea un nuevo registro
+            creaPV();
+            pVentas.setCantidad(cantidad);
+            pVentas.setIdProducto(idProducto);
+            pVentas.setIdVenta(idVenta);
+            pVentas.setSubtotal(cantidad * idProducto.getPrecioVenta());
+            mDProductosVentas.insertarProducto(pVentas);
+            lista.add(pVentas);
+        }
+        productoSeleccionado = null;
+        // Calcula y retorna el total actualizado
+        return getTotalVenta(lista);
+    }
+
+    public List<Productosventa> findAll() {
         return mDProductosVentas.getAll();
     }
-    
 
+    public double getTotalVenta(List<Productosventa> lista) {
+        double total = 0.0;
+        for (Productosventa item : lista) {
+            total += item.getSubtotal();
+        }
+        return total;
+    }
+
+    public void vCantidad(FacesContext contexto, UIComponent obp, Object valor) {
+        int cantidad = (int) valor;
+        UIInput ciu = (UIInput) obp;
+
+        if (cantidad <= 0) {
+            ciu.setValid(false);
+            FacesMessage mensaje1 = new FacesMessage("La cantidad debe ser mayor a 0");
+            contexto.addMessage(ciu.getClientId(contexto), mensaje1);
+        } else if (isPSNull()) {
+            ciu.setValid(false);
+            FacesMessage mensaje2 = new FacesMessage("Primero seleccione el producto que quiera añadir");
+            contexto.addMessage(ciu.getClientId(contexto), mensaje2);
+        }
+    }
 }
