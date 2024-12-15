@@ -31,4 +31,12 @@ public class MDVentas {
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+    
+    // Actualizar una persona
+    public void actualizarVenta(Ventas v) {
+        Ventas existente = ventasFacade.find(v.getIdVenta());
+        if (existente != null) {
+            ventasFacade.edit(v);
+        }
+    }
 }

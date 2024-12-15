@@ -28,9 +28,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Productosventa.findAll", query = "SELECT p FROM Productosventa p"),
-    @NamedQuery(name = "Productosventa.findByIdproductosVenta", query = "SELECT p FROM Productosventa p WHERE p.idproductosVenta = :idproductosVenta"),
     @NamedQuery(name = "Productosventa.findByIdVenta", query = "SELECT p FROM Productosventa p WHERE p.idVenta = :idVenta"),
-    @NamedQuery(name = "Productosventa.findByCantidad", query = "SELECT p FROM Productosventa p WHERE p.cantidad = :cantidad")})
+    @NamedQuery(name = "Productosventa.findByIdproductosVenta", query = "SELECT p FROM Productosventa p WHERE p.idproductosVenta = :idproductosVenta"),
+    @NamedQuery(name = "Productosventa.findByCantidad", query = "SELECT p FROM Productosventa p WHERE p.cantidad = :cantidad"),
+    @NamedQuery(name = "Productosventa.findBySubtotal", query = "SELECT p FROM Productosventa p WHERE p.subtotal = :subtotal")})
 public class Productosventa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +44,9 @@ public class Productosventa implements Serializable {
     @NotNull
     @Column(name = "cantidad")
     private int cantidad;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "subtotal")
+    private Double subtotal;
     @JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
     @ManyToOne(optional = false)
     private Productos idProducto;
@@ -76,6 +80,14 @@ public class Productosventa implements Serializable {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public Double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
     }
 
     public Productos getIdProducto() {

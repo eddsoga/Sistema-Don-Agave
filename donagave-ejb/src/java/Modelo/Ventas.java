@@ -6,7 +6,9 @@ package Modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,12 +18,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,12 +44,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Ventas.findByEstadoVenta", query = "SELECT v FROM Ventas v WHERE v.estadoVenta = :estadoVenta")})
 public class Ventas implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idVenta")
-    private Integer idVenta;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechaHoraVenta")
@@ -68,6 +66,15 @@ public class Ventas implements Serializable {
     @Size(max = 50)
     @Column(name = "estadoVenta")
     private String estadoVenta;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVenta")
+    private List<Productosventa> productosventaList;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idVenta")
+    private Integer idVenta;
     @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)
     private Usuarios idUsuario;
@@ -93,6 +100,40 @@ public class Ventas implements Serializable {
 
     public void setIdVenta(Integer idVenta) {
         this.idVenta = idVenta;
+    }
+
+
+    public Usuarios getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuarios idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idVenta != null ? idVenta.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Ventas)) {
+            return false;
+        }
+        Ventas other = (Ventas) object;
+        if ((this.idVenta == null && other.idVenta != null) || (this.idVenta != null && !this.idVenta.equals(other.idVenta))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Modelo.Ventas[ idVenta=" + idVenta + " ]";
     }
 
     public Date getFechaHoraVenta() {
@@ -135,37 +176,13 @@ public class Ventas implements Serializable {
         this.estadoVenta = estadoVenta;
     }
 
-    public Usuarios getIdUsuario() {
-        return idUsuario;
+    @XmlTransient
+    public List<Productosventa> getProductosventaList() {
+        return productosventaList;
     }
 
-    public void setIdUsuario(Usuarios idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idVenta != null ? idVenta.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Ventas)) {
-            return false;
-        }
-        Ventas other = (Ventas) object;
-        if ((this.idVenta == null && other.idVenta != null) || (this.idVenta != null && !this.idVenta.equals(other.idVenta))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Modelo.Ventas[ idVenta=" + idVenta + " ]";
+    public void setProductosventaList(List<Productosventa> productosventaList) {
+        this.productosventaList = productosventaList;
     }
     
 }

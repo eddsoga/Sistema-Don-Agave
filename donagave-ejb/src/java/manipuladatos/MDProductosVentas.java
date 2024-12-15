@@ -40,9 +40,21 @@ public class MDProductosVentas {
     public List<Productosventa> getAll(){
         return productosventaFacade.findAll();
     }
-    
-    
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+    
+    public void actualizarProductoVenta(Productosventa p) {
+        Productosventa existente = productosventaFacade.find(p.getIdproductosVenta());
+        if (existente != null) {
+            productosventaFacade.edit(p);
+        }
+    }
+    public void borrarProductoVenta(Productosventa p) {
+        Productosventa existente = productosventaFacade.find(p.getIdproductosVenta());
+        if (existente != null) {
+            productosventaFacade.remove(p);
+        }
+    }
+    
 }

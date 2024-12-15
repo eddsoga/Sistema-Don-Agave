@@ -13,36 +13,106 @@
             <ui:define name="content">
 
                 <f:view>
+                    <p:growl id="messages"/>
+                    <div class="container m-3">
+                        <div class="row">
+                            <div class="col">
+                                <h:form>
+                                    <h3><h:outputText value="Detalles de Venta"/></h3>
+                                    <p:panelGrid columns="2">
+                                        <p:outputLabel value="IdVenta:" for="idVenta" />
+                                        <p:inputText id="idVenta" disabled="true" value="#{aDVenta.ventaSeleccionada.idVenta}" title="IdVenta" required="true" requiredMessage="The IdVenta field is required."/>
+                                        <p:outputLabel value="FechaHoraVenta:" for="fechaHoraVenta" />
+                                        <p:inputText id="fechaHoraVenta" disabled="true" value="#{aDVenta.ventaSeleccionada.fechaHoraVenta}" title="FechaHoraVenta" required="true" requiredMessage="The FechaHoraVenta field is required.">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </p:inputText>
+                                        <p:outputLabel value="MontoTotal:" for="montoTotal" />
+                                        <p:inputText id="montoTotal" disabled="true" value="#{aDVenta.ventaSeleccionada.montoTotal}" title="MontoTotal" required="true" requiredMessage="The MontoTotal field is required."/>
+                                        <p:outputLabel value="FormaPago:" for="formaPago" />
+                                        <p:inputText id="formaPago"  disabled="true" value="#{aDVenta.ventaSeleccionada.formaPago}" title="FormaPago" required="true" requiredMessage="The FormaPago field is required."/>
+                                        <p:outputLabel value="GuiaParticular:" for="guiaParticular" />
+                                        <p:inputText id="guiaParticular"  disabled="true" value="#{aDVenta.ventaSeleccionada.guiaParticular}" title="GuiaParticular" required="true" requiredMessage="The GuiaParticular field is required."/>
+                                        <p:outputLabel value="EstadoVenta:" for="estadoVenta" />
+                                        <p:inputText id="estadoVenta"  disabled="true" value="#{aDVenta.ventaSeleccionada.estadoVenta}" title="EstadoVenta" />
+                                        <p:outputLabel value="IdUsuario:" for="idUsuario" />
+                                        <p:inputText id="idUsuario"  disabled="true" value="#{aDVenta.ventaSeleccionada.idUsuario.nombre}" title="ID Usuario" required="true" requiredMessage="The IdUsuario field is required."/>
+                                    </p:panelGrid>
+                                    <p:commandButton value="Cerrar Venta" class="btn btn-danger m-3" style="width: 150px;"
+                                                     action="ventas" actionListener="#{aDVenta.cerrarVenta(aDVenta.ventaSeleccionada,aDVenta.ventaSeleccionada.montoTotal)}" ajax="false" update="messages"/>
+                                    <p:commandButton value="Abrir Venta" class="btn btn-success m-3" style="width: 150px;"
+                                                     action="ventas" actionListener="#{aDVenta.abrirVenta(aDVenta.ventaSeleccionada,aDVenta.ventaSeleccionada.montoTotal)}" ajax="false" update="messages"/>
 
+                                </h:form>
+                            </div>
 
-                    <h:form>
-                        <h1><h:outputText value="Create/Edit"/></h1>
-                        <p:panelGrid columns="2">
-                            <p:outputLabel value="IdVenta:" for="idVenta" />
-                            <p:inputText id="idVenta" value="#{aDVenta.ventaSeleccionada.idVenta}" title="IdVenta" required="true" requiredMessage="The IdVenta field is required."/>
-                            <p:outputLabel value="FechaHoraVenta:" for="fechaHoraVenta" />
-                            <p:inputText id="fechaHoraVenta" value="#{aDVenta.ventaSeleccionada.fechaHoraVenta}" title="FechaHoraVenta" required="true" requiredMessage="The FechaHoraVenta field is required.">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                            </p:inputText>
-                            <p:outputLabel value="MontoTotal:" for="montoTotal" />
-                            <p:inputText id="montoTotal" value="#{aDVenta.ventaSeleccionada.montoTotal}" title="MontoTotal" required="true" requiredMessage="The MontoTotal field is required."/>
-                            <p:outputLabel value="FormaPago:" for="formaPago" />
-                            <p:inputText id="formaPago" value="#{aDVenta.ventaSeleccionada.formaPago}" title="FormaPago" required="true" requiredMessage="The FormaPago field is required."/>
-                            <p:outputLabel value="GuiaParticular:" for="guiaParticular" />
-                            <p:inputText id="guiaParticular" value="#{aDVenta.ventaSeleccionada.guiaParticular}" title="GuiaParticular" required="true" requiredMessage="The GuiaParticular field is required."/>
-                            <p:outputLabel value="EstadoVenta:" for="estadoVenta" />
-                            <p:inputText id="estadoVenta" value="#{aDVenta.ventaSeleccionada.estadoVenta}" title="EstadoVenta" />
-                            <p:outputLabel value="IdUsuario:" for="idUsuario" />
-                            <p:selectOneMenu id="idUsuario" value="#{aDVenta.ventaSeleccionada.idUsuario}" required="true" requiredMessage="The IdUsuario field is required.">
-                                <!-- TODO: update below reference to list of available items-->
-                                <f:selectItems value="#{fixme}"/>
-                            </p:selectOneMenu>
-                        </p:panelGrid>
-                    </h:form>
+                            <div class="col bg-light rounded">
+                                <h:form class="m-3">
+                                    <h3><h:outputText  value="Detalles de Producto"/></h3>
+                                    <h:panelGrid columns="2">
+                                        <h:outputLabel value="Cantidad:" for="cantidad" />
+                                        <h:inputText id="cantidad" value="#{aDProductosVentas.pVentas.cantidad}" validator="#{aDProductosVentas.vCantidad}" title="Cantidad" required="true" requiredMessage="La cantidad cantidad de productos no debe estar vacía."/>
+                                        <h:outputLabel value="IdProducto:" for="idProducto" />
+                                        <p:inputText id="idProducto" value="#{aDProductosVentas.productoSeleccionado.idProducto}" disabled="true" title="ID Producto" required="true" requiredMessage="The ID Producto field is required."/>
+                                        <h:outputLabel value="NombreProducto" for="nombreProducto" />
+                                        <p:inputText id="nombreProdcuto" value="#{aDProductosVentas.productoSeleccionado.nombreProducto}" disabled="true" title="ID Producto" required="true" requiredMessage="The nombreProdcuto field is required."/>
+                                        <h:outputLabel value="Precio:" for="precioVenta" />
+                                        <p:inputText id="precioVenta" value="#{aDProductosVentas.productoSeleccionado.nombreProducto}" disabled="true" title="ID Producto" required="true" requiredMessage="The precioVenta field is required."/>
+                                        <p:commandButton value="Agregar" style="width: 150px;"
+                                                         action="#{aDVenta.guardarCambiosVenta(aDVenta.ventaSeleccionada)}" 
+                                                         actionListener="#{aDVenta.ventaSeleccionada.setMontoTotal(aDProductosVentas.añadirArticulo(aDProductosVentas.pVentas.cantidad,aDProductosVentas.productoSeleccionado,aDVenta.ventaSeleccionada,aDProductosVentas.productosIDVenta(aDVenta.ventaSeleccionada)))}" 
+                                                         ajax="false"
+                                                         
+                                                         update="messages"/>
+                                    </h:panelGrid>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+
                 </f:view>
+                
+                <h:form class="m-3"> 
+                    <h3><h:outputText value="Ordenados"/></h3>
+                    <p:dataTable value="#{aDProductosVentas.productosIDVenta(aDVenta.ventaSeleccionada)}" var="item">  
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cantidad"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre Productos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idProducto.nombreProducto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio Producto"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idProducto.precioVenta}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Subtotal"/>
+                            </f:facet>
+                            <h:outputText value="#{item.subtotal}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Acciones"/>
+                            </f:facet>
+                            <p:commandButton value="Eliminar" style="width: 150px;"
+                                             action="#{aDVenta.guardarCambiosVenta(aDVenta.ventaSeleccionada)}"
+                                             actionListener="#{aDVenta.ventaSeleccionada.setMontoTotal(aDProductosVentas.eliminarArticulo(aDVenta.ventaSeleccionada,item))}"
+                                             ajax="false"
+                                             update="messages"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
 
-                <h:form>
-                    <h3><h:outputText value="Lista Productos"/></h3>
+                <h:form class="m-3">
+                    <h3><h:outputText value="Lista General de Productos"/></h3>
                     <p:dataTable value="#{aDVenta.productos}" var="item">
                         <p:column>
                             <f:facet name="header">
@@ -79,63 +149,14 @@
                                 <h:outputText value="Acciones"/>
                             </f:facet>
                             <p:commandButton value="Seleccionar" style="width: 150px;"
-                                             action="detalleVenta" actionListener="#{aDProductosVentas.setProductoSeleccionado(item)}" ajax="false" update="messages"/>
+                                             actionListener="#{aDProductosVentas.setProductoSeleccionado(item)}" ajax="false" update="messages"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>
 
 
 
-                <h:form>
-                    <h3><h:outputText value="Productos de la cuenta"/></h3>
-                    <p:dataTable value="#{aDProductosVentas.productosIDVenta(aDVenta.ventaSeleccionada)}" var="item">  
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Cantidad"/>
-                            </f:facet>
-                            <h:outputText value="#{item.cantidad}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nombre Productos"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idProducto.nombreProducto}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Precio Producto"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idProducto.precioVenta}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Subtotal"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idProducto.precioVenta * item.cantidad}"/>
-                        </p:column>
-                    </p:dataTable>
-                </h:form>
-
-
-                <f:view>
-
-
-                    <h:form>
-                        <h3><h:outputText value="Create/Edit"/></h3>
-                        <h:panelGrid columns="2">
-                            <h:outputLabel value="Cantidad:" for="cantidad" />
-                            <h:inputText id="cantidad" value="#{aDProductosVentas.pVentas.cantidad}" title="Cantidad" required="true" requiredMessage="The Cantidad field is required."/>
-                            <h:outputLabel value="IdProducto:" for="idProducto" />
-                            <h:outputLabel value="#{aDProductosVentas.productoSeleccionado.idProducto}" for="idProducto" />
-                            <h:outputLabel value="NombreProducto" for="nombreProducto" />
-                            <h:outputLabel value="#{aDProductosVentas.productoSeleccionado.nombreProducto}" for="nombreProducto" />
-                            <p:commandButton value="Seleccionar" style="width: 150px;"
-                                             action="detalleVenta" actionListener="#{aDProductosVentas.añadirArticulo(aDProductosVentas.pVentas.cantidad,aDProductosVentas.productoSeleccionado,aDVenta.ventaSeleccionada)}" ajax="false" update="messages"/>
-                        </h:panelGrid>
-                    </h:form>
-                    
-                </f:view>
-
+                
 
             </ui:define>
 

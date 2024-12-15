@@ -111,6 +111,27 @@ public class ADVenta implements Serializable {
         this.vendedor = vendedor;
     }
     
+    public void guardarCambiosVenta(Ventas v){
+        mDVentas.actualizarVenta(v);
+    }
+    
+    public void cerrarVenta(Ventas venta,double total){
+        venta.setEstadoVenta("Finalizada");
+        venta.setMontoTotal(total);
+        guardarCambiosVenta(venta);
+        
+    }
+    public void abrirVenta(Ventas venta,double total){
+        venta.setEstadoVenta("Abierta");
+        venta.setMontoTotal(total);
+        guardarCambiosVenta(venta);
+    }
+    public void finalizarVenta(Ventas venta,double total){
+        venta.setEstadoVenta("Finalizada");
+        venta.setMontoTotal(total);
+        guardarCambiosVenta(venta);
+    }
+    
     
     
     
