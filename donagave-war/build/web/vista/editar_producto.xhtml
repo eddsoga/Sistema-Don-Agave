@@ -34,7 +34,7 @@
                                 <h:inputText id="precioCompra" value="#{aDProducto.producto.precioCompra}" title="PrecioCompra" validator="#{aDProducto.vPrecioCompra}"  required="true" requiredMessage="The PrecioCompra field is required."/>
                                 <h:outputLabel value="PrecioVenta:" for="precioVenta" />
                                 <h:inputText id="precioVenta" value="#{aDProducto.producto.precioVenta}" title="PrecioVenta" validator="#{aDProducto.vPrecioVenta}"  required="true" requiredMessage="The PrecioVenta field is required."/>
-                                <h:commandButton value="Guardar Cambios" action="#{aDProducto.actualizarProducto()}" styleClass="btn btn-primary"  ajax="false" update="messages" />
+                                <p:commandButton value="Guardar Cambios" action="#{aDProducto.actualizarProductoo()}" styleClass="btn btn-primary"  ajax="false" update="messages" />
                                 <h:commandButton value="Cancelar" action="registro_producto" styleClass="btn btn-secondary" />
                             </h:panelGrid>
                         </h:form>

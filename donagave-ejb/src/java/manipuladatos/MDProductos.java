@@ -37,6 +37,10 @@ public class MDProductos {
             System.out.println("Producto ediatdo en MDProductos");
         }
     }
+    
+    public void actualizarProductoo(Productos p) {
+        productosFacade.edit(p);
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

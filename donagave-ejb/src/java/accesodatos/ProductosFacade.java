@@ -41,4 +41,9 @@ public class ProductosFacade extends AbstractFacade<Productos> {
         return p;
     }
     
+    @Override
+    public void edit(Productos entity) {
+        getEntityManager().merge(entity); // Actualizar el registro en la base de datos
+    }
+    
 }

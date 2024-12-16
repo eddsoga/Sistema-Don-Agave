@@ -12,6 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import manipuladatos.MDProductos;
 import Modelo.Productos;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -199,6 +200,20 @@ public class ADProducto implements Serializable {
     public BarChartModel getExistenciaModel() {
         initExistenciaModel(); // Calcula antes de devolver el modelo
         return existenciaModel;
+    }
+    
+    public void prepararEditar(Productos p) {
+        this.producto = p;
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("editar_producto.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public String actualizarProductoo() {
+        mDProductos.actualizarProductoo(producto); // Actualizar en la base de datos
+        return "registro_producto?faces-redirect=true";
     }
     
 }

@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <body>
- 
+
         <ui:composition template="./../template/plantilla.xhtml">
 
             <ui:define name="content">
@@ -20,7 +20,7 @@
                             <h:outputLabel value="NombreProducto:" for="nombreProducto" />
                             <h:inputText id="nombreProducto" value="#{aDProducto.producto.nombreProducto}" validator="#{aDProducto.vNombreProducto}" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
                             <h:outputLabel value="TipoProducto:" for="tipoProducto" />
-                            
+
                             <h:selectOneMenu id="tipoProducto" value="#{aDProducto.producto.tipoProducto}" title="TipoProducto" required="true" requiredMessage="El campo Tipo Producto es obligatorio." class="form-select">
                                 <f:selectItem itemValue="" itemLabel="Seleccione Tipo de Producto" noSelectionOption="true" />
                                 <f:selectItem itemValue="Comida" itemLabel="Comida" />
@@ -38,7 +38,7 @@
                             <p:commandButton value="Registrar" actionListener="#{aDProducto.registroProducto()}" class="btn btn-success" ajax="false" update="messages"  />
                         </h:panelGrid>
                     </h:form>
-                    
+
 
 
                     <h:form>
@@ -98,15 +98,21 @@
                                 </f:facet>
                                 <h:outputText value="#{item.precioVenta}"/>
                             </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Editar" />
+                                </f:facet>
+                                <h:commandButton value="Editar" action="#{aDProducto.prepararEditar(item)}" class="btn btn-success" />
+                            </p:column>
                         </p:dataTable>
                     </h:form>
 
-                    
-                </f:view>
-               
-                
 
-                
+                </f:view>
+
+
+
+
             </ui:define>
 
         </ui:composition>

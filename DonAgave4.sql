@@ -71,7 +71,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Cremita de Mezcal','Mezcal',NULL,NULL,50,20,900,1300),(3,'Tequila Don Julio','Bebida',50,10,40,60,400,500),(4,'Tlayuda Tradicional','Comida',30,5,25,40,80,150),(5,'Mezcal Espadín','Mezcal',100,30,70,120,300,450),(6,'Cerveza Artesanal','Bebida',200,50,150,250,30,60),(7,'Mole Oaxaqueño','Comida',20,8,12,30,100,180),(8,'Mezcal Tobalá','Mezcal',50,15,35,50,500,750);
+INSERT INTO `productos` VALUES (1,'Cremita de Mezcal','Mezcal',0,50,0,20,900,1300),(3,'Tequila Don Julio','Bebida',50,10,40,60,400,500),(4,'Tlayuda Tradicional','Comida',30,5,25,40,80,150),(5,'Mezcal Espadín','Mezcal',100,30,70,120,300,450),(6,'Cerveza Artesanal','Bebida',200,50,150,250,30,60),(7,'Mole Oaxaqueño','Comida',20,6,12,30,100,180),(8,'Mezcal Tobalá','Mezcal',50,15,35,50,500,750);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `productosventa` (
   KEY `fk_venta_idx` (`idVenta`),
   CONSTRAINT `fk_producto` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`),
   CONSTRAINT `fk_venta` FOREIGN KEY (`idVenta`) REFERENCES `ventas` (`idVenta`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `productosventa` (
 
 LOCK TABLES `productosventa` WRITE;
 /*!40000 ALTER TABLE `productosventa` DISABLE KEYS */;
-INSERT INTO `productosventa` VALUES (1,7,1,0,0),(2,5,1,0,0),(3,6,1,0,0),(4,3,1,5,0),(5,1,1,5,0),(6,5,1,10,0),(7,5,1,10,0),(8,8,1,7,0);
+INSERT INTO `productosventa` VALUES (93,1,15,1,1300);
 /*!40000 ALTER TABLE `productosventa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +181,7 @@ CREATE TABLE `ventas` (
   PRIMARY KEY (`idVenta`),
   KEY `idUsuario` (`idUsuario`),
   CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +190,7 @@ CREATE TABLE `ventas` (
 
 LOCK TABLES `ventas` WRITE;
 /*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
-INSERT INTO `ventas` VALUES (1,1,'2024-12-12 06:15:38',0,'Efectivo','No','Abierta'),(2,1,'2024-12-12 06:18:06',0,'Tarjeta','no','Abierta'),(3,1,'2024-12-12 06:19:26',0,'Tarjeta','no','Abierta'),(4,1,'2024-12-12 06:19:38',0,'Tarjeta','No','Abierta');
+INSERT INTO `ventas` VALUES (12,1,'2024-12-15 17:54:16',0,'Efectivo','no','Finalizada'),(13,1,'2024-12-15 17:59:31',0,'Efectivo','no','Finalizada'),(14,1,'2024-12-15 18:02:23',0,'Tarjeta','no','En Proceso'),(15,1,'2024-12-16 03:12:14',1300,'Efectivo','no','Finalizada');
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -203,4 +203,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-12 13:06:38
+-- Dump completed on 2024-12-15 21:47:16
