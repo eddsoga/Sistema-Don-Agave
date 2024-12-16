@@ -11,13 +11,12 @@
         <ui:composition template="./../template/plantilla.xhtml">
 
             <ui:define name="content">
-
-                <f:view>
-                    <p:growl id="messages"/>
-                    <div class="container m-3">
-                        <div class="row">
+                <div class="container m-3">
+                    <div class="row">
+                        <f:view>
                             <div class="col">
                                 <h:form>
+                                    <p:growl id="messages"/>
                                     <h3><h:outputText value="Detalles de Venta"/></h3>
                                     <p:panelGrid columns="2">
                                         <p:outputLabel value="IdVenta:" for="idVenta" />
@@ -41,12 +40,13 @@
                                                      action="ventas" actionListener="#{aDVenta.cerrarVenta(aDVenta.ventaSeleccionada,aDVenta.ventaSeleccionada.montoTotal)}" ajax="false" update="messages"/>
                                     <p:commandButton value="Abrir Venta" class="btn btn-success m-3" style="width: 150px;"
                                                      action="ventas" actionListener="#{aDVenta.abrirVenta(aDVenta.ventaSeleccionada,aDVenta.ventaSeleccionada.montoTotal)}" ajax="false" update="messages"/>
-
                                 </h:form>
                             </div>
-
+                        </f:view>
+                        <f:view>
                             <div class="col bg-light rounded">
                                 <h:form class="m-3">
+                                    <p:growl id="messages2"/>
                                     <h3><h:outputText  value="Detalles de Producto"/></h3>
                                     <h:panelGrid columns="2">
                                         <h:outputLabel value="Cantidad:" for="cantidad" />
@@ -61,107 +61,113 @@
                                                          action="#{aDVenta.guardarCambiosVenta(aDVenta.ventaSeleccionada)}" 
                                                          actionListener="#{aDVenta.ventaSeleccionada.setMontoTotal(aDProductosVentas.añadirArticulo(aDProductosVentas.pVentas.cantidad,aDProductosVentas.productoSeleccionado,aDVenta.ventaSeleccionada,aDProductosVentas.productosIDVenta(aDVenta.ventaSeleccionada)))}" 
                                                          ajax="false"
-                                                         
-                                                         update="messages"/>
+                                                         update="messages2"/>
                                     </h:panelGrid>
                                 </h:form>
                             </div>
-                        </div>
+                        </f:view>
                     </div>
+                    
+                    
 
-                </f:view>
-                
-                <h:form class="m-3"> 
-                    <h3><h:outputText value="Ordenados"/></h3>
-                    <p:dataTable value="#{aDProductosVentas.productosIDVenta(aDVenta.ventaSeleccionada)}" var="item">  
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Cantidad"/>
-                            </f:facet>
-                            <h:outputText value="#{item.cantidad}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nombre Productos"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idProducto.nombreProducto}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Precio Producto"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idProducto.precioVenta}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Subtotal"/>
-                            </f:facet>
-                            <h:outputText value="#{item.subtotal}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Acciones"/>
-                            </f:facet>
-                            <p:commandButton value="Eliminar" style="width: 150px;"
-                                             action="#{aDVenta.guardarCambiosVenta(aDVenta.ventaSeleccionada)}"
-                                             actionListener="#{aDVenta.ventaSeleccionada.setMontoTotal(aDProductosVentas.eliminarArticulo(aDVenta.ventaSeleccionada,item))}"
-                                             ajax="false"
-                                             update="messages"/>
-                        </p:column>
-                    </p:dataTable>
-                </h:form>
+                   
+                        <h:form class="m-3"> 
+                            <p:growl id="messages3"/>
+                            <h3><h:outputText value="Ordenados"/></h3>
+                            <p:dataTable value="#{aDProductosVentas.productosIDVenta(aDVenta.ventaSeleccionada)}" var="item">  
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cantidad"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cantidad}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre Productos"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idProducto.nombreProducto}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Precio Producto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idProducto.precioVenta}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Subtotal"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.subtotal}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Acciones"/>
+                                    </f:facet>
+                                    <p:commandButton value="Eliminar" style="width: 150px;"
+                                                     action="#{aDVenta.guardarCambiosVenta(aDVenta.ventaSeleccionada)}"
+                                                     actionListener="#{aDVenta.ventaSeleccionada.setMontoTotal(aDProductosVentas.eliminarArticulo(aDVenta.ventaSeleccionada,item))}"
+                                                     ajax="false"
+                                                     update="messages3"/>
 
-                <h:form class="m-3">
-                    <h3><h:outputText value="Lista General de Productos"/></h3>
-                    <p:dataTable value="#{aDVenta.productos}" var="item">
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="IdProducto"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idProducto}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="NombreProducto"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombreProducto}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="TipoProducto"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tipoProducto}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Existencia"/>
-                            </f:facet>
-                            <h:outputText value="#{item.existencia}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="PrecioVenta"/>
-                            </f:facet>
-                            <h:outputText value="#{item.precioVenta}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Acciones"/>
-                            </f:facet>
-                            <p:commandButton value="Seleccionar" style="width: 150px;"
-                                             actionListener="#{aDProductosVentas.setProductoSeleccionado(item)}" ajax="false" update="messages"/>
-                        </p:column>
-                    </p:dataTable>
-                </h:form>
-
-
-
-                
-
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    
+                    <f:view>
+                        <h:form class="m-3">
+                            <p:growl id="messages4"/>
+                            <h3><h:outputText value="Lista General de Productos"/></h3>
+                            <p:dataTable value="#{aDVenta.productos}" var="item">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IdProducto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idProducto}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NombreProducto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombreProducto}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TipoProducto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.tipoProducto}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Existencia"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.existencia}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Salidas"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.salidas}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PrecioVenta"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.precioVenta}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Acciones"/>
+                                    </f:facet>
+                                    <p:commandButton value="Seleccionar" style="width: 150px;"
+                                                     actionListener="#{aDProductosVentas.setProductoSeleccionado(item)}" 
+                                                     ajax="false" 
+                                                     update="messages4"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </f:view>
+                </div>
             </ui:define>
-
-
         </ui:composition>
-
     </body>
 </html>

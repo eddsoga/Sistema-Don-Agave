@@ -12,7 +12,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import manipuladatos.MDProductos;
 import Modelo.Productos;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,20 +51,6 @@ public class ADProducto implements Serializable {
                 new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "Producto registrado correctamente.", "Producto registrado correctamente."));
 
-    }
-    
-    public void prepararEditar(Productos p) {
-        this.producto = p;
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("editar_producto.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public String actualizarProducto() {
-        mDProductos.actualizarProducto(producto); // Actualizar en la base de datos
-        return "registro_producto?faces-redirect=true";
     }
 
     public MDProductos getmDProductos() {

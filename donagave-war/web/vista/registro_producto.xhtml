@@ -11,12 +11,11 @@
         <ui:composition template="./../template/plantilla.xhtml">
 
             <ui:define name="content">
-                <center>
                 <f:view>
 
                     <p:growl id="messages"/>
                     <h:form>
-                        <h1><h:outputText value="Agrega producto"/></h1>
+                        <h1><h:outputText value="Create/Edit"/></h1>
                         <h:panelGrid columns="2">
                             <h:outputLabel value="NombreProducto:" for="nombreProducto" />
                             <h:inputText id="nombreProducto" value="#{aDProducto.producto.nombreProducto}" validator="#{aDProducto.vNombreProducto}" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
@@ -99,19 +98,13 @@
                                 </f:facet>
                                 <h:outputText value="#{item.precioVenta}"/>
                             </p:column>
-                            <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Editar" />
-                                        </f:facet>
-                                        <h:commandButton value="Editar" action="#{aDProducto.prepararEditar(item)}" class="btn btn-success" />
-                                    </p:column>
                         </p:dataTable>
                     </h:form>
 
                     
                 </f:view>
                
-                </center>
+                
 
                 
             </ui:define>

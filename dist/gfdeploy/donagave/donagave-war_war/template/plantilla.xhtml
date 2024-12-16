@@ -15,20 +15,20 @@
 
     <h:body>
 
-        <div id="top" class="bg-success">
-            <header class="bg-success border-bottom shadow-sm py-3 rounded">
+        <div id="top">
+            <header class="bg-light border-bottom shadow-sm py-3 rounded">
                 <div class="container d-flex justify-content-between align-items-center">
                     <!-- Nombre o Logo -->
                     <div class="d-flex align-items-center">
                         <img class="rounded" src="https://d26lpennugtm8s.cloudfront.net/stores/001/008/550/rte/logo%20don%20agave1.jpg "
                              style="width: 15%;"></img>
-                        <h5 class="m-3 fw-bold text-white">  Sistema Don Agave</h5>
+                        <h5 class="m-3 fw-bold text-dark">  Sistema Don Agave</h5>
                     </div>
 
                     <!-- Detalles adicionales -->
                     <div class="text-muted small">
-                        <span class="me-3 fw-bold text-white">Bienvenido,</span>
-                        <h:outputText class="fw-bold text-white" value="#{aDUsuario.usuario.nombre}"/>
+                        <span class="me-3">Bienvenido,</span>
+                        <h:outputText value="#{aDUsuario.usuario.nombre}"/>
                         <span class="badge bg-primary">Versión Beta 1.0</span>
                     </div>
                 </div>

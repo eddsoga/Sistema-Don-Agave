@@ -31,7 +31,11 @@ public class MDProductos {
         return productosFacade.getUnProducto(id);
     }
     public void actualizarProducto(Productos p) {
-        productosFacade.edit(p);
+        Productos existente = productosFacade.find(p.getIdProducto());
+        if (existente != null) {
+            productosFacade.edit(p);
+            System.out.println("Producto ediatdo en MDProductos");
+        }
     }
 
     // Add business logic below. (Right-click in editor and choose
